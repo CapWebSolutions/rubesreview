@@ -1,0 +1,22 @@
+.evaluation-org-stars-1:after { content: " \2605\2606\2606\2606\2606 "; }
+.evaluation-org-stars-2:after { content: " \2605\2605\2606\2606\2606 "; }
+.evaluation-org-stars-3:after { content: " \2605\2605\2605\2606\2606 "; }
+.evaluation-org-stars-4:after { content: " \2605\2605\2605\2605\2606 "; }
+.evaluation-org-stars-5:after { content: " \2605\2605\2605\2605\2605"; }
+/* &#9734 is hollow star */
+
+/* Ref: https://css-tricks.com/star-ratings/ */
+.rating {
+	unicode-bidi: bidi-override;
+	direction: rtl;
+  }
+  .rating > span {
+	display: inline-block;
+	position: relative;
+	width: 1.1em;
+  }
+  .rating > span:hover:before,
+  .rating > span:hover ~ span:before {
+	 content: "\2605";
+	 position: absolute;
+  }
