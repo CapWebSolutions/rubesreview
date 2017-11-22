@@ -26,6 +26,7 @@ function rubesreview_evaluation_info() {
 	$prefix = '_rubesreview_evaluation_';
 
 	$post_id = get_the_ID( $post->ID ); 
+	$evaluation_org_type = get_post_meta( $post_id, $prefix . 'org_type', true );
 	$evaluation_organization = get_post_meta( $post_id, $prefix . 'organization', true );
 	$evaluation_org_address = get_post_meta( $post_id,  $prefix . 'org_address', true );
 	$evaluation_org_web = get_post_meta( $post_id,  $prefix . 'org_web', true );
@@ -48,7 +49,8 @@ function rubesreview_evaluation_info() {
 		
 	if( !empty( $evaluation_featured_img ) ) { 
 		$evaluation_content .= sprintf('<span class="alignright evaluation-image">%s</span>', $evaluation_featured_img ); 
-	}	
+	}
+	$evaluation_content .= sprintf('<div class="evaluation-organization">Org Type: %s</div>', $evaluation_org_type ); 	
 	$evaluation_content .= sprintf('<div class="evaluation-organization">Business Name: %s</div>', $evaluation_organization ); 
 	$evaluation_content .= sprintf('<div class="evaluation-org-address">Address: %s</div>', $evaluation_org_address ); 
 	$evaluation_content .= sprintf('<div class="evaluation-org-web">%s</div>', $evaluation_org_web ); 

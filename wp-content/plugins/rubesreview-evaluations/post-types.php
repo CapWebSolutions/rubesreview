@@ -50,7 +50,7 @@ function cptui_register_my_cpts_evaluation() {
 			"query_var" => true,
 			"menu_icon" => "dashicons-testimonial",
 			"supports" => array( "title", "editor", "thumbnail", "revisions", "genesis-cpt-archives-settings" ),
-			"taxonomies" => array( "category", "post_tag" ),
+			"taxonomies" => array( "orgtype", "post_tag" ),
 		);
 	
 		register_post_type( "evaluation", $args );

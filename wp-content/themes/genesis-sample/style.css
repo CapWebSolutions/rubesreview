@@ -615,7 +615,7 @@ th:first-child {
 .site-inner,
 .wrap {
 	margin: 0 auto;
-	max-width: 1280px;
+	/* max-width: 1280px; */
 }
 
 .site-inner {
@@ -1351,9 +1351,10 @@ ul.archives > li {
 	text-align: center;
 }
 
-nav#genesis-nav-primary:not(.home-page) {
-    /* margin-top: 150px; */
-}
+/* nav#genesis-nav-primary:not(.home-page) {
+    margin-top: 150px;
+ } */
+
 	/* ## Footer Navigation
 --------------------------------------------- */
 
@@ -1575,14 +1576,14 @@ p.entry-meta {
 	padding: 10px;
 	border-radius: 15px;
 }
-#custom_html-2 > div > div > div > div > a.button {
+/* #custom_html-2 > div > div > div > div > a.button {
 	position: relative; 
 	top: -300px;
 	width: 20%;
 	text-align: center;
 	display: block;
 	margin: 0 auto;
-}
+} */
 
 p.more-from-category {
 	text-align: right;
@@ -1597,12 +1598,49 @@ p.more-from-category a {
 #custom_html-2 {
 	margin-bottom: 0;
 }
-body.home > div.site-container > div.site-inner {
+/* body.home > div.site-container > div.site-inner {
 	display: none;
-}
+} */
 body > div.site-container > div.spotlight-cta-widget > div {
 	max-width: 100%;
 }
+body > div.site-container > header > div > div {
+	display: none;
+}
+#menu-primary-menu > .menu-item {
+	list-style-type: none;
+	list-style-image: none !important;
+}
+.entry {
+	padding: 0 80px 70px;
+}
+
+/* Logo container */
+.front-page-img-container {
+	background: -webkit-linear-gradient(
+	  left,
+	  rgba(221, 115, 115, 0.5),
+	  rgba(206, 32, 40, 1)
+	);
+	background: linear-gradient(
+	  to right,
+	  rgba(221, 115, 115, 0.5),
+	  rgba(206, 32, 40, 1)
+	);
+	padding: 10px; 
+	border-radius: 25px;
+	display: -ms-inline-grid;
+	display: inline-grid;
+	-ms-grid-columns: auto auto;
+	grid-template-columns: auto auto;
+  }
+.front-page-img-container img {
+	-ms-flex-item-align: center;
+	-ms-grid-row-align: center;
+	align-self: center;
+  }
+  
+  
 /* ## Ratings  Page
 --------------------------------------------- */
   .inline { 
@@ -1706,7 +1744,7 @@ body > div.site-container > div.spotlight-cta-widget > div {
 ---------------------------------------------------------------------------------------------------- */
 
 .site-footer {
-	background-color: #fff;
+	background-color: #ffffff;
 	border-top: 1px solid #eee;
 	font-size: 16px;
 	font-size: 1.6rem;

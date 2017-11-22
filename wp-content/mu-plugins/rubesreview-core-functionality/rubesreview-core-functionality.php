@@ -23,6 +23,9 @@ define( 'CWS_DIR', dirname( __FILE__ ) );
 // General. This should always be used. 
 include_once( CWS_DIR . '/lib/functions/general.php' );
 
+// Shortcode Updater. 
+include_once( CWS_DIR . '/lib/functions/update-shortcodes.php' );
+
 // Define needed Custom Post Types.
 // include_once( CWS_DIR . '/lib/functions/post-types.php' );
 

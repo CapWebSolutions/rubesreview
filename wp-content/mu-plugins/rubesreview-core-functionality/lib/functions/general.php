@@ -118,17 +118,6 @@ function be_custom_menu_order( $menu_ord ) {
 add_filter( 'custom_menu_order', 'be_custom_menu_order' );
 add_filter( 'menu_order', 'be_custom_menu_order' );
 
-// Disable WPSEO columns on edit screen
-add_filter( 'wpseo_use_page_analysis', '__return_false' );
-
-// * Automatically link Twitter names to Twitter URL
-// Ref: https://www.nutsandboltsmedia.com/how-to-create-a-custom-functionality-plugin-and-why-you-need-one/
-function twtreplace( $content ) {
-	$twtreplace = preg_replace( '/([^a-zA-Z0-9-_&])@([0-9a-zA-Z_]+)/','$1<a href="http://twitter.com/$2" target="_blank" rel="nofollow">@$2</a>',$content );
-	return $twtreplace;
-}
-add_filter( 'the_content', 'twtreplace' );
-add_filter( 'comment_text', 'twtreplace' );
 
 //
 // Force  IE to NOT use compatibility mode
@@ -145,19 +134,16 @@ function wsm_keep_ie_modern( $headers ) {
 // * Ref: https://my.studiopress.com/snippets/search-form/
 add_filter( 'genesis_search_text', 'sp_search_text' );
 function sp_search_text( $text ) {
-	// return esc_attr( 'Search my blog...' );
 	return esc_attr( 'Search ' . get_bloginfo( $show = '', 'display' ) );
 	get_permalink();
 }
 
 //
-// Enqueue / register needed scripts
-// Load Font Awesome
+// Enqueue / register needed scripts & styles
 add_action( 'wp_enqueue_scripts', 'cws_enqueue_needed_scripts' );
 function cws_enqueue_needed_scripts() {
-	// font-awesome
-	// Ref: application of these fonts: https://sridharkatakam.com/using-font-awesome-wordpress/
 	wp_enqueue_style( 'font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css' );
+	wp_enqueue_style( 'core-functionality', CWS_DIR . '/assets/css/core-functionality.css' );
 }
 
 //
@@ -260,7 +246,7 @@ add_theme_support( 'genesis-footer-widgets', 3 );
 add_theme_support( 'custom-background' );
 
 //* Add the front page widgets
-add_action( 'genesis_header', 'cws_home_featured', 20 );
+// add_action( 'genesis_header', 'cws_home_featured', 20 );
 function cws_home_featured() {
 
 	if ( ! is_front_page() ) {
@@ -335,3 +321,24 @@ function rubesreview_login_redirect( $redirect_to, $request, $user  ) {
     }
 }
 add_filter( 'login_redirect', 'rubesreview_login_redirect', 10, 3 );
+
+
+
+// add_action( 'pre_get_posts', 'sk_show_posts_from_a_category_posts_page' );
+/**
+ * Show Posts from a specific category on Posts page
+ *
+ * @author Bill Erickson
+ * @author Sridhar Katakam
+ * @link http://www.billerickson.net/customize-the-wordpress-query/
+ * @param object $query data
+ *
+ */
+function sk_show_posts_from_a_category_posts_page( $query ) {
+
+	if( $query->is_main_query() && is_page('spotlight' ) ) {
+		$query->set( 'category_name', 'agency' );
+		// $query->set( array( 'cat' => '2,3,4,5' ) );
+	}
+
+}
