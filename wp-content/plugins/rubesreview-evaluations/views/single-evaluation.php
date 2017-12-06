@@ -1,6 +1,6 @@
 <?php
 /**
- * evaluation Post Type: Single Post View
+ * Evaluation Post Type: Single Post View
  *
  * @package    rubesreview evaluations
  * @author     Cap Web Solutions
@@ -19,51 +19,225 @@ add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_c
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
 add_action( 'genesis_entry_header', 'rubesreview_evaluation_info', 10 );
-function rubesreview_evaluation_info() {
+function rubesreview_evaluation_info( $evaluation_meta ) {
 
 	global $post;
 
 	$prefix = '_rubesreview_evaluation_';
 
 	$post_id = get_the_ID( $post->ID ); 
-	$evaluation_org_type = get_post_meta( $post_id, $prefix . 'org_type', true );
-	$evaluation_organization = get_post_meta( $post_id, $prefix . 'organization', true );
-	$evaluation_org_address = get_post_meta( $post_id,  $prefix . 'org_address', true );
-	$evaluation_org_web = get_post_meta( $post_id,  $prefix . 'org_web', true );
-	$evaluation_org_phone = get_post_meta( $post_id,  $prefix . 'org_phone', true );
-	$evaluation_org_overall_satisfaction_rating = get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true );
-	$evaluation_org_professionalism_rating = get_post_meta( $post_id,  $prefix . 'org_professionalism_rating', true );
-	$evaluation_org_overall_rating = get_post_meta( $post_id,  $prefix . 'org_overall_rating', true );
-	// Set up rating stars with max at 5 stars. 
-	// $evaluation_org_overall_rating_stars = '';
-	// if ( 5 < $evaluation_org_overall_rating ) $evaluation_org_overall_rating = 5;
-	// for( $i= 1 ; $i <= $evaluation_org_overall_rating ; $i++ ) { $evaluation_org_overall_rating_stars .= '&starf;'; } 
+	// $evaluation_org_type = 	get_the_term_list( get_the_ID(), 'orgtype', '', ', ', '' );
+	// $evaluation_organization = get_post_meta( $post_id, $prefix . 'organization', true );
+	// $evaluation_org_address = get_post_meta( $post_id,  $prefix . 'org_address', true );
+	// $evaluation_org_web = get_post_meta( $post_id,  $prefix . 'org_web', true );
+	// $evaluation_org_phone = get_post_meta( $post_id,  $prefix . 'org_phone', true );
+	// $evaluation_raw_content = get_the_content( );
+	// $evaluation_org_overall_satisfaction_rating = get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true );
+	// $evaluation_org_hourly_rate = get_post_meta( $post_id,  $prefix . 'org_hourly_rate', true );
+	// $evaluation_org_paid_timely = get_post_meta( $post_id,  $prefix . 'org_paid_timely', true );
+	// $evaluation_org_hours_worked = get_post_meta( $post_id,  $prefix . 'org_hours_worked', true );
+	// $evaluation_org_arranged_flight = get_post_meta( $post_id,  $prefix . 'org_arranged_flight', true );
+	// $evaluation_org_arranged_car = get_post_meta( $post_id,  $prefix . 'org_arranged_car', true );
+	// $evaluation_org_hotel_appt_accommodations = get_post_meta( $post_id,  $prefix . 'org_hotel_appt_accommodations', true );
+	// $evaluation_org_per_diem = get_post_meta( $post_id,  $prefix . 'org_per_diem', true );
+	// $evaluation_org_professionalism_rating = get_post_meta( $post_id,  $prefix . 'org_professionalism_rating', true );
+	// $evaluation_org_addl_comments = get_post_meta( $post_id,  $prefix . 'org_additional_comments', true );
+
+
+	$stars_ctr = 0;
+	// $evaluation_featured_img = '';
+	// if( has_post_thumbnail( $post_id ) ) {
+	// 	$evaluation_featured_img = genesis_get_image( array( 'format' => 'html', 'size' => 'rubesreview-evaluation-image', 'attr' => array( 'class' => 'evaluation-image' ) ) );
+	// }
+	// $evaluation_content = '<div class="evaluation-wrap">';
+	// if( !empty( $evaluation_featured_img ) ) { 
+	// 	$evaluation_content .= sprintf('<span class="alignright evaluation-image">%s</span>', $evaluation_featured_img ); 
+	// }
+	// $evaluation_content .= sprintf('<div class="evaluation-organization">Organization Type: %s</div>', $evaluation_org_type ); 	
+
+	// $evaluation_content .= sprintf('<div class="evaluation-organization">Organization Name: %s</div>', $evaluation_organization ); 
+	// $evaluation_content .= sprintf('<div class="evaluation-org-address">Address: %s</div>', $evaluation_org_address ); 
+	// $evaluation_content .= sprintf('<div class="evaluation-org-phone">Phone: %s</div>', $evaluation_org_phone ); 
+	// $evaluation_content .= sprintf('<div class="evaluation-org-web">%s</div>', $evaluation_org_web ); 
+
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-wrap">');
+
+	// $my_stars = get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true );
+	// $running_stars = intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Overall Satisfaction with Agency </div>', $my_stars );
+	$running_stars= 0;
+
+	// $my_stars = get_post_meta( $post_id,  $prefix . 'org_hourly_rate', true ); 
+
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Hourly Rate </div>', $my_stars ); 	
+
+	// $my_stars = get_post_meta( $post_id,  $prefix . 'org_paid_timely', true );
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Paid In A Timely Manner </div>', $my_stars ); 
+
+	// $my_stars = get_post_meta( $post_id,  $prefix . 'org_hours_worked', true );
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Hours Worked </div>', $my_stars ); 
 	
-// d($post);
-// d($evaluation_organization,$evaluation_org_web);
+	// $my_stars = get_post_meta( $post_id,  $prefix . 'org_arranged_flight', true );
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Arranged Flight </div>', $my_stars ); 
+	
+	// $my_stars = get_post_meta( $post_id,  $prefix . 'org_arranged_car', true );
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Arranged Car </div>', $my_stars ); 
+	
+	// $my_stars = get_post_meta( $post_id,  $prefix . 'org_hotel_appt_accommodations', true );
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Hotel / Apartment Accommodations </div>', $my_stars ); 
+
+	// $my_stars =  get_post_meta( $post_id,  $prefix . 'org_per_diem', true );
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Per Diem </div>', $my_stars );
+
+	// $my_stars =  get_post_meta( $post_id,  $prefix . 'org_professionalism_rating', true );
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Professionalism of Contact Person </div>', $my_stars );
+
+	// $my_stars = get_post_meta( $post_id,  $prefix . 'org_overall_rating', true );
+	// $running_stars += intval($my_stars);
+	// $stars_ctr += 1;
+
+	// $evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Overall Rating </div>', $my_stars ); 
+	$stars_ctr = 0;
+
+
+	$evaluation_meta = array(
+		'org_type' => get_the_term_list( get_the_ID(), 'orgtype', '', ', ', '' ),
+		'organization' => get_post_meta( $post_id, $prefix . 'organization', true ),
+		'org_address' => get_post_meta( $post_id,  $prefix . 'org_address', true ),
+		'org_web' => get_post_meta( $post_id,  $prefix . 'org_web', true ),
+		'org_phone' => get_post_meta( $post_id,  $prefix . 'org_phone', true ),
+		'raw_content' => get_the_content( ),
+		// 'org_overall_satisfaction' => get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true ),
+		'org_overall_satisfaction' => get_post_meta( $post_id,  'org_overall_satisfaction', true ),
+		'org_hourly_rate' => get_post_meta( $post_id,  $prefix . 'org_hourly_rate', true ),
+		'org_overall_satisfaction_rating' => get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true ),
+		'org_hourly_rate' => get_post_meta( $post_id,  $prefix . 'org_hourly_rate', true ),
+		'org_paid_timely' => get_post_meta( $post_id,  $prefix . 'org_paid_timely', true ),
+		'org_hours_worked' => get_post_meta( $post_id,  $prefix . 'org_hours_worked', true ),
+		'org_arranged_flight' => get_post_meta( $post_id,  $prefix . 'org_arranged_flight', true ),
+		'org_arranged_car' => get_post_meta( $post_id,  $prefix . 'org_arranged_car', true ),
+		'org_hotel_appt_accommodations' => get_post_meta( $post_id,  $prefix . 'org_hotel_appt_accommodations', true ),
+		'org_per_diem' => get_post_meta( $post_id,  $prefix . 'org_per_diem', true ),
+		'org_professionalism_rating' => get_post_meta( $post_id,  $prefix . 'org_professionalism_rating', true ),
+		'org_addl_comments' => get_post_meta( $post_id,  $prefix . 'org_additional_comments', true ),
+	);	
 	$evaluation_featured_img = '';
 	if( has_post_thumbnail( $post_id ) ) {
-		$evaluation_featured_img = genesis_get_image( array( 'format' => 'html', 'size' => 'rubesreview-evaluation-image', 'attr' => array( 'class' => 'author-image' ) ) );
+		$evaluation_meta['featured_img'] = genesis_get_image( array( 'format' => 'html', 'size' => 'rubesreview-evaluation-image', 'attr' => array( 'class' => 'evaluation-image' ) ) );
 	}
+
+
+
+	$running_stars = 0;
 	$evaluation_content = '<div class="evaluation-wrap">';
-		
-	if( !empty( $evaluation_featured_img ) ) { 
-		$evaluation_content .= sprintf('<span class="alignright evaluation-image">%s</span>', $evaluation_featured_img ); 
+	foreach ($evaluation_meta as $key => $value) {
+		switch ( $key ) {
+			case 'featured_img' :
+				if( !empty( $value ) ) { 
+					$evaluation_content .= sprintf('<span class="alignright evaluation-image">%s</span>', $value ); 
+				}
+				break;
+			case 'org_type':
+				$evaluation_content .= sprintf('<div class="evaluation-organization">Organization Type: %s</div>', $value ); 	
+				break;
+			case 'organization':
+				$evaluation_content .= sprintf('<div class="evaluation-organization">Organization Name: %s</div>', $value ); 
+				break;
+			case 'org_address':
+			case 'org_phone':
+			case 'org_web':
+				$evaluation_content .= sprintf('<div class="evaluation-org-address">%s</div>', $value ); 
+				break; 
+			case 'org_overall_satisfaction':
+				$running_stars = intval($value);
+				$stars_ctr += 1;
+				//* Add in opening star div since we are at top of star ratings now
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-wrap">'); 
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Overall Satisfaction with Agency </div>', $value );
+				break;
+			case 'org_hourly_rate':
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Hourly Rate </div>', $value ); 	
+				break;
+			case 'org_paid_timely':
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Paid In A Timely Manner </div>', $value ); 
+				break;
+			case 'org_hours_worked' :
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Hours Worked </div>', $value ); 
+				break;
+			case 'org_arranged_flight' :
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Arranged Flight </div>', $value ); 
+				break;
+			case 'org_arranged_car' :			
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Arranged Car </div>', $value ); 
+				break;
+			case 'org_hotel_appt_accommodations' :
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Hotel / Apartment Accommodations </div>', $value ); 
+				break;
+			case 'org_per_diem' :
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Per Diem </div>', $value );
+				break;
+			case 'org_professionalism_rating' :
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Professionalism of Contact Person </div>', $value );
+				break;
+			case 'org_overall_rating' :
+				$running_stars += intval($value);
+				$stars_ctr += 1;
+				$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $value . '">Overall Rating </div>', $value ); 
+				break;
+		}
 	}
-	$evaluation_content .= sprintf('<div class="evaluation-organization">Org Type: %s</div>', $evaluation_org_type ); 	
-	$evaluation_content .= sprintf('<div class="evaluation-organization">Business Name: %s</div>', $evaluation_organization ); 
-	$evaluation_content .= sprintf('<div class="evaluation-org-address">Address: %s</div>', $evaluation_org_address ); 
-	$evaluation_content .= sprintf('<div class="evaluation-org-web">%s</div>', $evaluation_org_web ); 
-	$my_stars = get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true );
-	$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Overall Satisfaction with Agency </div>', $my_stars );
-	$my_stars = get_post_meta( $post_id,  $prefix . 'org_hourly_rate', true );
-	$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Overall Rating </div>', $my_stars ); 	
-	$my_stars =  get_post_meta( $post_id,  $prefix . 'org_professionalism_rating', true );
-	$evaluation_content .= sprintf('<div class="evaluation-org-stars-' . $my_stars . '">Professionalism of contact person </div>', $my_stars );
-	$evaluation_content .= '</div>';  // close evaluation-wrap
 
-	// printf( '<article class="evaluation-entry">%s</article>', $evaluation_content  );
+	// Calc the average of the ratings using the running sum of the ratings divided by number of ratings.
+	//    If the average is .5 or higher, make the star representation take the next higher value. 
 
+	$avg_stars = $running_stars / $stars_ctr;
+	$my_stars = (string)intval($avg_stars);
+	if ( ( $running_stars % $stars_ctr ) >= 5 ) $my_stars +=1;
+
+	$evaluation_meta['org_average_rating_stars'] = $my_stars;
+	$evaluation_meta['org_average_rating_number'] = $avg_stars;
+
+	$evaluation_content .= sprintf('<br><div class="evaluation-org-stars-' . $evaluation_meta['org_average_rating_stars'] . '">Average Rating => <strong>%s</strong></div><br>', strval( $evaluation_meta['org_average_rating_number'] ) ); 
+
+	$evaluation_content .= '</div>';  // close org-star-wrap
+	$evaluation_content .= sprintf('<div class="evaluation-addl-comments">Comments: %s</div>', $evaluation_meta['org_addl_comments'] );
+	$evaluation_content .= '</div></div>';  // close evaluation-wrap
+
+	printf( '<article class="evaluation-entry">%s</article>', $evaluation_content  );
+	return ( $evaluation_meta );
 
 }
 

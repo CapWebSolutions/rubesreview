@@ -23,15 +23,6 @@ function adds_new_evaluations_image_sizes() {
 	}
 }
 
-/**
- * rubesreview Pilaes evaluation Post Type
- *
- * @package    Simple_Listing_Post_Type
- * @author     Robin Cornett <hello@robincornett.com>
- * @copyright  2017 Matt Ryan
- *
- */
-
 
  /**
  * load evaluation archive template
@@ -40,7 +31,7 @@ function adds_new_evaluations_image_sizes() {
  * @since  1.2.0
  */
 function load_archive_template( $archive_template ) {
-	if ( is_post_type_archive( 'evaluation' ) || is_tax( 'source' ) ) {
+	if ( is_post_type_archive( 'evaluation' ) || is_tax( 'orgtype' ) ) {
 		$archive_template = dirname( __FILE__ ) . '/views/archive-evaluation.php';
 	}
 
@@ -55,8 +46,8 @@ function load_archive_template( $archive_template ) {
  * @since  1.2.0
  */
 function load_taxonomy_archive_template( $taxonomy_archive_template ) {
-	if ( is_post_type_archive( 'evaluation' ) && is_archive( 'source', array( 'clients', 'colleagues', 'professionals' ) ) ) {
-		$taxonomy_archive_template = dirname( __FILE__ ) . '/views/taxonomy-source.php';
+	if ( is_post_type_archive( 'evaluation' ) && is_archive( 'orgtype', array( 'clients', 'colleagues', 'professionals' ) ) ) {
+		$taxonomy_archive_template = dirname( __FILE__ ) . '/views/taxonomy-orgtype.php';
 	}
 
 	return $taxonomy_archive_template;
@@ -75,4 +66,18 @@ function load_single_template( $single_template ) {
 	}
 	return $single_template;
 
+}
+
+/**
+ * Generate overall numerical score and star rating string for display
+ * 
+ * @param  
+ * @since 1.0.0
+ */
+function get_overall_rating_for( $args ) {
+
+	$args['overall'] = 4.9;
+	$args['stars'] = '\f005\f005\f005\f005';
+	d($args);
+	return $args;
 }

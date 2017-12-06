@@ -13,7 +13,7 @@ if ( file_exists( dirname( __FILE__ ) . '/metabox/init.php' ) ) {
 }
 
 
-add_action( 'rubesreview-evaluations_init', 'cws_register_evaluation_metabox' );
+add_action( 'cmb2_init', 'cws_register_evaluation_metabox' );
 function cws_register_evaluation_metabox() {
 
 	// Start with an underscore to hide fields from custom fields list
@@ -22,18 +22,18 @@ function cws_register_evaluation_metabox() {
 	/**
 	 * Metabox to be displayed on a single page ID
 	 */
-	$cmb_evaluation = new_rubesreview-evaluations_box( array(
+	$cmb_evaluation = new_cmb2_box( array(
 		'id'           => $prefix . 'metabox',
-		'title'        => __( 'evaluation Details:', 'rubesreview-evaluations' ),
+		'title'        => __( 'Evaluation Details:', 'rubesreview-evaluations' ),
 		'object_types' => array( 'evaluation', ), // Post type
 		'context'      => 'normal',
 		'priority'     => 'high',
 		'show_names'   => true, 
-		'taxonomies'	=> array('type'),
+		'taxonomies'	=> array('orgtype'),
 	) );
 	
 	$cmb_evaluation->add_field( array(
-		'name' => __( 'Organization', 'rubesreview-evaluations' ),
+		'name' => __( 'Organization Name', 'rubesreview-evaluations' ),
 		'id'   => $prefix . 'organization',
 		'type' => 'text',
 	) );
@@ -53,8 +53,9 @@ function cws_register_evaluation_metabox() {
 	// 	),
 	// ) );
 	$cmb_evaluation->add_field( array(
-		'name' => __( 'Address', 'rubesreview-evaluations' ),
+		'name' => __( 'Orgaanization Address', 'rubesreview-evaluations' ),
 		'id'   => $prefix . 'org_address',
+		'desc' => __( 'Address associated with evaluated location/facility.', 'rubesreview-evaluations' ),
 		'type' => 'text',
 	) );
 	$cmb_evaluation->add_field( array(
@@ -69,7 +70,7 @@ function cws_register_evaluation_metabox() {
 	) );
 	$cmb_evaluation->add_field( array(
 		'name' => __( 'Overall satisfaction with agency', 'rubesreview-evaluations' ),
-		'id'   => $prefix . 'org_overall_satisfaction',
+		'id'   => 'org_overall_satisfaction',
 		'desc' => __( '1 to 5 (5 highest)', 'rubesreview-evaluations' ),
 		'type' => 'text',
 		'attributes' => array(
@@ -81,6 +82,72 @@ function cws_register_evaluation_metabox() {
 	$cmb_evaluation->add_field( array(
 		'name' => __( 'Hourly Rate', 'rubesreview-evaluations' ),
 		'id'   => $prefix . 'org_hourly_rate',
+		'desc' => __( '1 to 5 (5 highest)', 'rubesreview-evaluations' ),
+		'type' => 'text',
+		'attributes' => array(
+			'type' => 'number',
+			'max' => '5',
+			'min' => '1',			
+		),
+	) );
+	$cmb_evaluation->add_field( array(
+		'name' => __( 'Paid in a Timely Manner', 'rubesreview-evaluations' ),
+		'id'   => $prefix . 'org_paid_timely',
+		'desc' => __( '1 to 5 (5 highest)', 'rubesreview-evaluations' ),
+		'type' => 'text',
+		'attributes' => array(
+			'type' => 'number',
+			'max' => '5',
+			'min' => '1',			
+		),
+	) );
+	$cmb_evaluation->add_field( array(
+		'name' => __( 'Hours Worked', 'rubesreview-evaluations' ),
+		'id'   => $prefix . 'org_hours_worked',
+		'desc' => __( '1 to 5 (5 highest)', 'rubesreview-evaluations' ),
+		'type' => 'text',
+		'attributes' => array(
+			'type' => 'number',
+			'max' => '5',
+			'min' => '1',			
+		),
+	) );
+	$cmb_evaluation->add_field( array(
+		'name' => __( 'Arranged Flight', 'rubesreview-evaluations' ),
+		'id'   => $prefix . 'org_arranged_flight',
+		'desc' => __( '1 to 5 (5 highest)', 'rubesreview-evaluations' ),
+		'type' => 'text',
+		'attributes' => array(
+			'type' => 'number',
+			'max' => '5',
+			'min' => '1',			
+		),
+	) );
+	$cmb_evaluation->add_field( array(
+		'name' => __( 'Arranged Car', 'rubesreview-evaluations' ),
+		'id'   => $prefix . 'org_arranged_car',
+		'desc' => __( '1 to 5 (5 highest)', 'rubesreview-evaluations' ),
+		'type' => 'text',
+		'attributes' => array(
+			'type' => 'number',
+			'max' => '5',
+			'min' => '1',			
+		),
+	) );
+	$cmb_evaluation->add_field( array(
+		'name' => __( 'Hotel Apartment Accommodations', 'rubesreview-evaluations' ),
+		'id'   => $prefix . 'org_hotel_appt_accommodations',
+		'desc' => __( '1 to 5 (5 highest)', 'rubesreview-evaluations' ),
+		'type' => 'text',
+		'attributes' => array(
+			'type' => 'number',
+			'max' => '5',
+			'min' => '1',			
+		),
+	) );
+	$cmb_evaluation->add_field( array(
+		'name' => __( 'Per Diem', 'rubesreview-evaluations' ),
+		'id'   => $prefix . 'org_per_diem',
 		'desc' => __( '1 to 5 (5 highest)', 'rubesreview-evaluations' ),
 		'type' => 'text',
 		'attributes' => array(
