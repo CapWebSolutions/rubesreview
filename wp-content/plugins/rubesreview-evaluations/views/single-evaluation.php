@@ -158,7 +158,7 @@ function rubesreview_evaluation_info( $evaluation_meta ) {
 				$evaluation_content .= sprintf('<div class="evaluation-organization">Organization Type: %s</div>', $value ); 	
 				break;
 			case 'organization':
-				$evaluation_content .= sprintf('<div class="evaluation-organization">Organization Name: %s</div>', $value ); 
+				// $evaluation_content .= sprintf('<div class="evaluation-organization">Organization Name: %s</div>', $value ); 
 				break;
 			case 'org_address':
 			case 'org_phone':

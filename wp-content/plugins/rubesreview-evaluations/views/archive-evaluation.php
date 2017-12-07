@@ -32,25 +32,17 @@ function rubesreview_evaluation_info() {
 	}
 	
 	$evaluation_content = '<div class="evaluation-wrap">';
-	$source   = get_the_term_list( get_the_ID(), 'source', '', ', ', '' );
-	if ( $source ) {
-		$evaluation_content .= sprintf('<div class="evaluation-source">' . esc_attr( strip_tags( $source ) ) . '</div>');
-	}
+
 	$evaluation_content .= sprintf('<div class="evaluation-descriptor">%s</div>', $evaluation_descriptor );
 	if( !empty( $evaluation_featured_img ) ) { 
 		$evaluation_content .= sprintf('<span class="alignright evaluation-image">%s</span>', $evaluation_featured_img ); 
 	}	
-	if( !empty( $evaluation_company ) ) { 
-		$evaluation_content .= sprintf('<p class="evaluation-company">%s</p>', $evaluation_company ); 
-	}
-	if( !empty( $evaluation_location ) ) { 
-		$evaluation_content .= sprintf('<p class="evaluation-location">%s</p>', $evaluation_location ); 
-	}
+	// $evaluation_content .= sprintf('<div class="evaluation-organization">Organization Type: %s</div>', get_the_title( $post_id  ) );
 	$evaluation_content .= '</div>';  // close evaluation-wrap
 
 	printf( '<article class="evaluation-entry">%s</article>', $evaluation_content  );
 
 
 }
-
+// genesis_posts_nav();  //* TODO: Find a place for this. 
 genesis();

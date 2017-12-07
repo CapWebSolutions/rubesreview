@@ -744,3 +744,14 @@ if ( is_page( 578 ) ) {
 		// Upload the file and send back the attachment post ID
 		return media_handle_upload( 'submitted_post_thumbnail', $post_id, $attachment_post_data );
 	}
+
+/**
+ * Check if PODS is running
+ */
+function pods_is_installed () {
+	
+		if ( defined( 'PODS_VERSION' ) ) {
+			return true;
+		}
+		return false;
+	}
