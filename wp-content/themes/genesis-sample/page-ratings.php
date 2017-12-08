@@ -95,13 +95,18 @@ function rubes_ratings_loop() {
 							global $post;
 							$post_id = get_the_ID( $post->ID ); 
 							$org_name = get_the_title( $post_id );
-							$org_overall_satisfaction = get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true );
-							// var_dump( get_permalink( $post_id) );
+
+							//* get the value of the tax here... Some flavor of orgtype. 
+							//* Need slug later for archive link
+							$org_custom_term = wp_get_post_terms( $post_id, 'orgtype' );
+							// $org_overall_satisfaction = get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true );
+							$org_overall_satisfaction = get_post_meta( $post_id,  'average_rating', true );
+
 							$rating_content = sprintf('<div class="evaluation-org-stars-' . $org_overall_satisfaction . '">' . '<a href="' . get_permalink( $post_id ) . '">' . $org_name . '</a></div>' );
 	
 							printf( '<div class="ratings-line">%s</div>', $rating_content  );
 						}
-						if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/orgtype )' . '">More %s Evaluations</a>', $org_name_title );
+						if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/org-type/%s' . '">More %s Evaluations</a>', $org_custom_term[0]->slug, $org_name_title );
 					} else {
 						$rating_content = sprintf('No evaluations found.', $org_name_title );	
 						printf( '<div class="ratings-line">%s</div>', $rating_content  );
@@ -118,7 +123,8 @@ function rubes_ratings_loop() {
 			$query_args = array(
 				'post_type' => 'evaluation',
 				'posts_per_page' => 5,
-				'order' => 'DESC',
+				'orderby' => 'meta_value_num',
+				'meta_key' => 'average_rating',
 				'tax_query' => array(
 					array(
 						'taxonomy' => 'orgtype',
@@ -145,12 +151,18 @@ function rubes_ratings_loop() {
 					global $post;
 					$post_id = get_the_ID( $post->ID ); 
 					$org_name = get_the_title( $post_id );
-					$org_overall_satisfaction = get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true );
-					$rating_content = sprintf('<div class="evaluation-org-stars-' . $org_overall_satisfaction . '">' . '<a href="' . get_permalink( $post_id ) . '">' . $org_name . '</a></div>' );
+
+					//* get the value of the tax here... Some flavor of orgtype. 
+					//* Need slug later for archive link
+					$org_custom_term = wp_get_post_terms( $post_id, 'orgtype' );
+
+					// $org_overall_satisfaction = get_post_meta( $post_id,  $prefix . 'org_overall_satisfaction', true );
+					$org_average_rating = get_post_meta( $post_id,  'average_rating', true );
+					$rating_content = sprintf('<div class="evaluation-org-stars-' . $org_average_rating . '">' . '<a href="' . get_permalink( $post_id ) . '">' . $org_name . '</a></div>' );
 					
 					printf( '<div class="ratings-line">%s</div>', $rating_content  );
 				}
-				if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/orgtype )' . '">More %s Evaluations</a>', $org_name_title );
+					if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/org-type/%s' . '">More %s Evaluations</a>', $org_custom_term[0]->slug, $org_name_title );
 			} else {
 				$rating_content = sprintf('No evaluations found.', $org_name_title );	
 				printf( '<div class="ratings-line">%s</div>', $rating_content  );

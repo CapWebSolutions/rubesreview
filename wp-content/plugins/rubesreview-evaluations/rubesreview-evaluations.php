@@ -15,6 +15,7 @@
 // Get all the things
 require_once( dirname( __FILE__ ) . '/post-types.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes.php' );
+require_once( dirname( __FILE__ ) . '/metaboxes-organizations.php' );
 require_once( dirname( __FILE__ ) . '/taxonomies.php' );
 require_once( dirname( __FILE__ ) . '/helper-functions.php' );
 // require_once( dirname( __FILE__ ) . '/get-evaluation.php' );

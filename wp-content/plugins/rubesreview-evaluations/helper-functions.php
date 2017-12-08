@@ -34,7 +34,9 @@ function load_archive_template( $archive_template ) {
 	if ( is_post_type_archive( 'evaluation' ) || is_tax( 'orgtype' ) ) {
 		$archive_template = dirname( __FILE__ ) . '/views/archive-evaluation.php';
 	}
-
+	// if ( is_post_type_archive( 'organization' ) ) {
+	// 	$archive_template = dirname( __FILE__ ) . '/views/archive-organization.php';
+	// }
 	return $archive_template;
 
 }
@@ -63,6 +65,9 @@ function load_taxonomy_archive_template( $taxonomy_archive_template ) {
 function load_single_template( $single_template ) {
 	if ( is_singular( 'evaluation' ) ) {
 		$single_template = dirname( __FILE__ ) . '/views/single-evaluation.php';
+	}
+	if ( is_singular( 'organization' ) ) {
+		$single_template = dirname( __FILE__ ) . '/views/single-organization.php';
 	}
 	return $single_template;
 

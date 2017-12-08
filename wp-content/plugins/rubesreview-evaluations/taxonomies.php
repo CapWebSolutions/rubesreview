@@ -26,7 +26,7 @@ function cptui_register_my_taxes_orgtype() {
 			"choose_from_most_used" =>  __( "Choose from the available types.", "rubesreview"  ),
 			"not_found" => __( "No types found.", "rubesreview"  ),
 		);
-		register_taxonomy( "orgtype", array( "evaluation" ), $args );
+		register_taxonomy( "orgtype", array( "organization", "evaluation" ), $args );
 }
 
 add_action( 'init', 'cptui_register_my_taxes_orgtype' );

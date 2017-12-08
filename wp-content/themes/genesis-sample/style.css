@@ -1132,11 +1132,26 @@ ul.archives > li {
 .evaluation-org-stars-wrap {
 	width: 30%;
 }
+.organization-entry {
+	margin-left: 100px;
+	margin-top: 50px;
+}
+.organization-org-name,
+.organization-org-type,
+.organization-org-address {
+	margin-left:100px;
+}
+.evaluation-image,
+.organization-image {}
 
-.evaluation-image {}
-.evaluation-organization { color:red;}
-.evaluation-org-address { color: blue;}
+.evaluation-organization { color:red;} 
+
+.evaluation-org-address,
+
+.organization-org-address { color: blue;}
+
 .evaluation-org-web { color: green;}
+
 .evaluation-addl-comments {color: brown;}
 
 .org_type_form_section_header {
