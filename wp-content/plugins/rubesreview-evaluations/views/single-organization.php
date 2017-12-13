@@ -51,9 +51,3 @@ function rubesreview_organization_info( $organization_meta ) {
 }
 
 genesis();
-
-//* dump out the BB footer. 
-FLBuilder::render_query( array(
-	'post_type' => 'fl-builder-template',
-	'p'         => 619 // Breaver Header Template ID
-) );

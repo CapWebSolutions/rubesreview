@@ -1145,13 +1145,21 @@ ul.archives > li {
 .organization-image {}
 
 .evaluation-organization { color:red;} 
+.evaluation-name {
+	font-size: larger;
+	font-weight: 800;
+}
+.evaluation-wrap {
+	margin: 50px 0 50px 200px;
+}
+.evaluation-name {
+	margin-left: -50px;
+	padding-bottom: 20px; 
+}
 
 .evaluation-org-address,
-
 .organization-org-address { color: blue;}
-
 .evaluation-org-web { color: green;}
-
 .evaluation-addl-comments {color: brown;}
 
 .org_type_form_section_header {
@@ -2303,7 +2311,7 @@ body > div.site-container > header > div > div {
 		margin-bottom: 75px;
 }
 .ratings-section-wrapper {
-	max-width: 800px;
+	max-width: 75%;  /*8 800px; */
 	margin-left: 200px;
 }
 .ratings-section-heading {
@@ -2316,7 +2324,7 @@ body > div.site-container > header > div > div {
 	font-weight: 800;
 }
 .ratings-line {
-	width: 320px;
+	width: 100%;   /* 320px; */
 	margin-left: 60px;
 	padding-bottom: 5px;
 	font-size:	smaller;
@@ -2330,7 +2338,7 @@ body > div.site-container > header > div > div {
 }
 a.ratings-archive-link {
 	margin-left: 60px;
-	font-size: smaller;
+	font-size: small;
 
 }
 

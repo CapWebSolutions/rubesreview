@@ -23,8 +23,14 @@ function rubesreview_evaluation_taxonomy_info() {
 
 	global $post;
 
+	FLBuilder::render_query( array(
+		'post_type' => 'fl-builder-template',
+		'p'         => 956 // Breaver Header Template ID
+	) );
+
 	$prefix = '_rubesreview_evaluation_';
 
+	//* If here then 
 	$post_id = get_the_ID( $post->ID );
 	$evaluation_descriptor = get_post_meta( $post_id, $prefix . 'descriptor', true );
 	$evaluation_featured_img = '';

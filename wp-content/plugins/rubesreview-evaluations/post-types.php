@@ -111,9 +111,65 @@ function cptui_register_my_cpts_organization() {
 	register_post_type( "Organization", $args );
 }
 
+
+function cptui_register_my_cpts_emarecpt() {
+	/**
+	 * Post Type: Emare.
+	 */
+	
+		$labels = array(
+			"name" => __( "Emares", "rubesreview" ),
+			"singular_name" => __( "Emare", "rubesreview" ),
+			"menu_name" => __( "My Emares", "rubesreview" ),
+			"all_items" => __( "All Emares", "rubesreview" ),
+			"add_new" => __( "Add New Emare", "rubesreview" ),
+			"add_new_item" => __( "Add New Emare", "rubesreview" ),
+			"edit_item" => __( "Edit Emare", "rubesreview" ),
+			"new_item" => __( "New Emare", "rubesreview" ),
+			"view_item" => __( "View Emare", "rubesreview" ),
+			"view_items" => __( "View Emares", "rubesreview" ),
+			"search_items" => __( "Search Emares", "rubesreview" ),
+			"not_found" => __( "No Emares Found", "rubesreview" ),
+			"not_found_in_trash" => __( "No Emares found in trash", "rubesreview" ),
+			"featured_image" => __( "Featured Image", "rubesreview" ),
+			"set_featured_image" => __( "Set Featured Image for this Emare", "rubesreview" ),
+			"remove_featured_image" => __( "Remove Featured Image", "rubesreview" ),
+			"use_featured_image" => __( "Use as Featured Image for this Emare", "rubesreview" ),
+			"archives" => __( "Emare Archives", "rubesreview" ),
+			"insert_into_item" => __( "Insert into Emare", "rubesreview" ),
+			"uploaded_to_this_item" => __( "Uploaded to this Emare", "rubesreview" ),
+			"filter_items_list" => __( "Filter Emare List", "rubesreview" ),
+			"items_list" => __( "Emare List", "rubesreview" ),
+			"attributes" => __( "Emare Attributes", "rubesreview" ),
+		);
+	
+		$args = array(
+			"label" => __( "Emares", "rubesreview" ),
+			"labels" => $labels,
+			"description" => "Manages Emares for website",
+			"public" => true,
+			"publicly_queryable" => true,
+			"show_ui" => true,
+			"show_in_rest" => false,
+			"rest_base" => "",
+			"has_archive" => true,
+			"show_in_menu" => true,
+			"exclude_from_search" => false,
+			"capability_type" => "post",
+			"map_meta_cap" => true,
+			"hierarchical" => false,
+			"rewrite" => array( "slug" => "organizations", "with_front" => true ),
+			"query_var" => true,
+			"menu_icon" => "dashicons-testimonial",
+			"supports" => array( "thumbnail", "revisions", "genesis-cpt-archives-settings" ),
+			"taxonomies" => array( "orgtype" ),
+		);
+		register_post_type( "Emare", $args );
+	}
+	
 add_action( 'init', 'cptui_register_my_cpts_evaluation' );
 add_action( 'init', 'cptui_register_my_cpts_organization' );
-	
+// add_action( 'init', 'cptui_register_my_cpts_emarecpt' );
 	
 function rubesreview_evaluation_title( $input ) {
 
