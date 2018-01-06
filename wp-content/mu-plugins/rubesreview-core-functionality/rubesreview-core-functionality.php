@@ -17,6 +17,9 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+ // Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 // Plugin Directory. Set constant so we know where we are installed
 define( 'CWS_DIR', dirname( __FILE__ ) );
 
@@ -49,7 +52,5 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 if ( in_array( 'gravityforms/gravityforms.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	include_once( CWS_DIR . '/lib/functions/gravitytweaks.php' );
 }
-// or 
-if ( class_exists( 'GFForms' ) ) { 
-	include_once( CWS_DIR . '/lib/functions/gravitytweaks.php' );
-}
+
+ 

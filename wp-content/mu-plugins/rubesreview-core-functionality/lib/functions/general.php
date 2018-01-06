@@ -142,17 +142,17 @@ function sp_search_text( $text ) {
 // Enqueue / register needed scripts & styles
 add_action( 'wp_enqueue_scripts', 'cws_enqueue_needed_scripts' );
 function cws_enqueue_needed_scripts() {
-	wp_enqueue_style( 'font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css' );
+	wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/73b396df58.css' );
 	wp_enqueue_style( 'core-functionality', CWS_DIR . '/assets/css/core-functionality.css' );
 }
 
 //
 // Add custom logo to login page
-// Requires a transparent logo file in the theme's images folder named 'login_logo.png'
+// Requires a transparent logo file in the active theme's images folder named 'login_logo.png'
 add_action( 'login_head', 'custom_loginlogo' );
 function custom_loginlogo() {
 	echo '<style type="text/css">
-h1 a {background-image: url(' . get_bloginfo( 'template_directory' ) . '/images/login_logo.png) !important; }
+h1 a {background-image: url(' . get_bloginfo( 'stylesheet_directory' ) . '/images/login_logo.png) !important; }
 </style>';
 }
 
@@ -163,31 +163,6 @@ function add_custom_gravatar( $avatar_defaults ) {
 	 $avatar_defaults[ $myavatar ] = 'Custom Gravatar';
 	 return $avatar_defaults;
 }
-
-add_filter( 'comment_form_defaults', 'cd_pre_comment_text' );
-/**
- * Change the text output that appears before the comment form
- * Note: Logged in user will not see this text.
- *
- * @author Carrie Dils <http://www.carriedils.com>
- * @uses comment_notes_before <http://codex.wordpress.org/Function_Reference/comment_form>
- *  ref: http://www.carriedils.com/customize-wordpress-comments/
- */
-function cd_pre_comment_text( $arg ) {
-	$arg['comment_notes_before'] = "Want to see your pic by your comment? Get a free custom avatar at <a href='http://www.gravatar.com' target='_blank' >Gravatar</a>.";
-	return $arg;
-}
-
-// ref: http://www.carriedils.com/customize-wordpress-comments/
-add_action( 'pre_ping', 'disable_self_ping' );
-function disable_self_ping( &$links ) {
-	foreach ( $links as $l => $link ) {
-		if ( 0 === strpos( $link, get_option( 'home' ) ) ) {
-			unset( $links[ $l ] );
-		}
-	}
-}
-
 
 // We will make use of widget_title filter to 
 //dynamically replace custom tags with html tags
@@ -203,18 +178,6 @@ function accept_html_widget_title( $mytitle ) {
 
 	return $mytitle;
 }
-
-// Custom 404 Pages ===================================================
-// Call the sitemap generator
-// Source: http://www.carriedils.com/custom-404-wordpress-html-sitemap/
-// remove_action( 'genesis_loop', 'genesis_404' ); // Remove the default Genesis 404 content
-add_action( 'genesis_loop', 'cd_custom_404' ); // Add function for custom 404 content
-function cd_custom_404() {
-	if ( is_404() ) {
-		get_template_part( '/partials/sitemap' ); // Plop in our customized sitemap code
-	}
-}
-
 
 // Add the filter and function, returning the widget title only if the first character is not "!"
 // Author: Stephen Cronin
@@ -341,4 +304,12 @@ function sk_show_posts_from_a_category_posts_page( $query ) {
 		// $query->set( array( 'cat' => '2,3,4,5' ) );
 	}
 
+}
+
+//* Reduce the primary navigation menu to one level depth
+// add_filter( 'wp_nav_menu_args', 'prefix_generate_primary_menu_args' );
+function prefix_generate_primary_menu_args( $args ){
+	// var_dump($args);
+	if( 'primary-menu' == $args['menu'] ) 	$args['depth'] = 1;
+	return $args;
 }
