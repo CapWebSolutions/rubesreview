@@ -43,6 +43,10 @@ wp-content/themes/*
 .*
 ~*
 
+# ignore all files starting or ending with string HOLD
+HOLD*.*
+*.*HOLD
+
 # ignore node dependency directories (used by grunt)
 node_modules/
 
@@ -101,6 +105,6 @@ Thumbs.db
 
 # track these mu-plugins, plugins, and themes
 # add your own entries here
-!wp-content/themes/genesis-sample/
+!wp-content/themes/rubes-review/
 !wp-content/mu-plugins/
 !wp-content/plugins/rubesreview-evaluations/
