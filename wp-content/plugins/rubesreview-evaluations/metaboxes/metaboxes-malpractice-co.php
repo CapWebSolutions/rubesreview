@@ -19,12 +19,6 @@ function cws_register_malp_evaluation_metabox() {
 		'context'      => 'normal',
 		'priority'     => 'high',
 		'show_names'   => true, 
-		// 'taxonomies'	=> array('eval_org_type'),
-		// 'show_on_cb' => 'be_taxonomy_show_on_filter', // function should return a bool value
-		// 'show_on_cb' => 'cmb_only_show_for_malp',   // only show this metabox for Malpractice Company
-		// 'show_on_terms' => array(
-			// 'eval_org_type' => array( 'malpractice-comapny' ),
-		// ),
 	) );
 	
 	// This field name is common to all org types
@@ -33,23 +27,6 @@ function cws_register_malp_evaluation_metabox() {
 		'id'   => $prefix . 'organization_name',
 		'type' => 'text',
 	) );
-
-	// This field name is common to all org types
-	// $cmb_eval_malp->add_field( array(
-	// 	'name'             => __( 'Organization Type', 'rubesreview-evaluations' ),
-	// 	'desc'			=> 'Select type of organization being added.', 
-	// 	'id'               => $prefix . 'eval_org_type',
-	// 	'type'             => 'select',
-	// 	'show_option_none' => true,
-	// 	'options'          => array(
-	// 		'agency' => __( 'Agency', 'rubesreview-evaluations' ),
-	// 		'hospital'   => __( 'Hospital', 'rubesreview-evaluations' ),
-	// 		'malpractice'     => __( 'Malpractice Company', 'rubesreview-evaluations' ),
-	// 		'continuinged'     => __( 'Continuing Ed Company', 'rubesreview-evaluations' ),
-			
-	// 	),
-	// ) );
-
 
 	$cmb_eval_malp->add_field( array(
 		'name' => __( 'Overall Satisfaction with Malpractice Company', 'rubesreview-evaluations' ),
@@ -160,7 +137,7 @@ function cws_register_malp_evaluation_metabox() {
 	) );
 	$cmb_eval_malp->add_field( array(
 		'name' => __( 'Claim Handling', 'rubesreview-evaluations' ),
-		'id'   => $prefix . 'speaker_knowledge',
+		'id'   => $prefix . 'claim_handling',
 		'type' => 'radio_inline',
 		'options' => array(
 			'1' => __( '1', 'rubesreview-evaluations' ),

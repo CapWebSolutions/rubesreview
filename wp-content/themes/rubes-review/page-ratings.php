@@ -64,7 +64,7 @@ function rubes_ratings_loop() {
 		array('slug' => 'agency', 'pref' => 'agnt_', 'evaltype' => 'agency', 'posttype'=>'agnt_eval'),
 		array('slug' => 'hospital', 'pref' => 'hosp_', 'evaltype' => 'hospital', 'posttype'=>'hosp_eval'), 
 		array('slug' => 'continuing-education', 'pref' => 'cont_', 'evaltype' => 'continuing ed', 'posttype'=>'cont_eval'), 
-		array('slug' => 'malpractice-company','pref' => 'malp_', 'evaltype' => 'malpractice company', 'posttype'=>'malp_eval' ),
+		array('slug' => 'malpractice','pref' => 'malp_', 'evaltype' => 'malpractice company', 'posttype'=>'malp_eval' ),
 	);
 	switch ( $rating_display_value ) {
 		case 'Most Recent Ratings':
@@ -74,13 +74,6 @@ function rubes_ratings_loop() {
 					'post_type' => $orgvalue['posttype'],
 					'posts_per_page' => 5,
 					'order' => 'DESC',
-					// 'tax_query' => array(
-					// 	array(
-					// 		'taxonomy' => 'eval_org_type',
-					// 		'field' => 'name',
-					// 		'terms' => $orgvalue['slug'],
-					// 	)
-					// )
 				);
 
 				print_average_ratings_line( $query_args, $orgvalue, $prefix );
@@ -99,15 +92,7 @@ function rubes_ratings_loop() {
 					'order' => 'DESC',
 					'orderby' => 'meta_value_num',   // want to orderby the value of the $prefix . 'rating_average' field, highest to lowest, top 5
 					'meta_key' => $prefix . 'rating_average',
-					// 'tax_query' => array(
-					// 	array(
-					// 		'taxonomy' => 'eval_org_type',
-					// 		'field' => 'name',
-					// 		'terms' => $orgvalue['slug'],
-					// 	)
-					// )
 				);
-				// var_dump($query_args);
 				print_average_ratings_line( $query_args, $orgvalue, $prefix );
 			} /* End of $orgtypes loop */		
 			break; /* End of Ratings Leaderboard case */
@@ -137,13 +122,13 @@ function print_average_ratings_line( $args, $orgvalue, $prefix ) {
     if ( $wp_query -> have_posts() ) {
         while ( $wp_query -> have_posts() ) {
             $wp_query -> the_post();
-            $post_id = get_the_ID( $post->ID ); 
+			$post_id = get_the_ID(); 
             $org_name = get_the_title( $post_id );
 
             //* get the value of the tax here... Some flavor of orgtype. 
             //* Need slug later for archive link
-			// $my_term = get_the_terms( $post_id, 'org_type' );
 			$my_term = $orgvalue['evaltype'];
+			$my_term_slug = $orgvalue['slug'];
 
             // Pull off the overall rating. This was the calculated average value based on entered 1-5 ratings
             $rating_average = substr( get_post_meta( $post_id,  $prefix . 'rating_average', true ), 0, 1);  // this field name is questionable from form 11
@@ -162,7 +147,7 @@ function print_average_ratings_line( $args, $orgvalue, $prefix ) {
             $rating_content = sprintf('<div class="evaluation-org-stars-%s"><a href="%s">%s &mdash; %s</a></div>', $rating_average, get_permalink( $post_id ), $eval_org_name_front, $eval_org_name_location  );
 			printf( '<div class="ratings-line">%s</div>', $rating_content  );
         }
-        if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/%s' . '">More %s Evaluations</a>', $my_term, ucwords($my_term) );
+        if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/%s' . '">More %s Evaluations</a>', $my_term_slug, ucwords($my_term) );
     
     } else {
         $rating_content = sprintf('No evaluations found.', $org_name_title );	

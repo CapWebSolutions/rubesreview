@@ -27,26 +27,13 @@
 
 function cws_reviews_shortcode( $atts ) {
 	
-		$a = shortcode_atts( array(
-			'orgtype' => 'agency',
-		), $atts );
+	$a = shortcode_atts( $atts );
+	// $a = shortcode_atts( array(
+	// 		'evaltype' => 'agnt_eval',
+	// 	), $atts );
 	
-		// $args = array(
-		// 	'cat'=> $a['orgtype'],
-		// 	'post_type' => 'evaluation'
-		// );
-
-		$args = array(
-			'post_type' => 'evaluation',
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'eval_org_type',
-					'field' => 'name',
-					'terms' =>  $a['orgtype'],
-				)
-			)
-		);
+		$args = array( 'post_type' => $a['evaltype'] );
 		$the_query = new WP_Query( $args );
 		return $the_query->found_posts;
-	}
-	add_shortcode( 'rubesreviews', 'cws_reviews_shortcode' );
+}
+add_shortcode( 'rubesreviews', 'cws_reviews_shortcode' );

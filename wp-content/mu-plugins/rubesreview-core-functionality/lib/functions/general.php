@@ -46,8 +46,8 @@ add_filter( 'widget_text', 'do_shortcode' );
 add_theme_support( 'genesis-connect-woocommerce' );
 
 // Remove theme and plugin editor links
-add_action( 'admin_init','cws_hide_editor_and_tools' );
-function cws_hide_editor_and_tools() {
+add_action( 'admin_init','CORE_FUNCTION_hide_editor_and_tools' );
+function CORE_FUNCTION_hide_editor_and_tools() {
 	remove_submenu_page( 'themes.php','theme-editor.php' );
 	remove_submenu_page( 'plugins.php','plugin-editor.php' );
 }
@@ -140,10 +140,11 @@ function sp_search_text( $text ) {
 
 //
 // Enqueue / register needed scripts & styles
-add_action( 'wp_enqueue_scripts', 'cws_enqueue_needed_scripts' );
-function cws_enqueue_needed_scripts() {
+add_action( 'wp_enqueue_scripts', 'rubes_enqueue_needed_scripts' );
+// add_action( 'admin_enqueue_scripts', 'CORE_FUNCTION_enqueue_needed_scripts' );
+function rubes_enqueue_needed_scripts() {
 	wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/73b396df58.css' );
-	wp_enqueue_style( 'core-functionality', CWS_DIR . '/assets/css/core-functionality.css' );
+	wp_enqueue_style( 'core-functionality', CORE_FUNCTION_URL . 'assets/css/core-functionality.css', array(), null, true );
 }
 
 //
@@ -151,7 +152,7 @@ function cws_enqueue_needed_scripts() {
 // Requires a transparent logo file in the active theme's images folder named 'login_logo.png'
 add_action( 'login_head', 'custom_loginlogo' );
 function custom_loginlogo() {
-	echo '<style type="text/css">
+echo '<style type="text/css">
 h1 a {background-image: url(' . get_bloginfo( 'stylesheet_directory' ) . '/images/login_logo.png) !important; }
 </style>';
 }
@@ -209,8 +210,8 @@ add_theme_support( 'genesis-footer-widgets', 3 );
 add_theme_support( 'custom-background' );
 
 //* Add the front page widgets
-// add_action( 'genesis_header', 'cws_home_featured', 20 );
-function cws_home_featured() {
+// add_action( 'genesis_header', 'CORE_FUNCTION_home_featured', 20 );
+function CORE_FUNCTION_home_featured() {
 
 	if ( ! is_front_page() ) {
 		return;
@@ -301,15 +302,5 @@ function sk_show_posts_from_a_category_posts_page( $query ) {
 
 	if( $query->is_main_query() && is_page('spotlight' ) ) {
 		$query->set( 'category_name', 'agency' );
-		// $query->set( array( 'cat' => '2,3,4,5' ) );
 	}
-
-}
-
-//* Reduce the primary navigation menu to one level depth
-// add_filter( 'wp_nav_menu_args', 'prefix_generate_primary_menu_args' );
-function prefix_generate_primary_menu_args( $args ){
-	// var_dump($args);
-	if( 'primary-menu' == $args['menu'] ) 	$args['depth'] = 1;
-	return $args;
 }

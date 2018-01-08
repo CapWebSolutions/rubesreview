@@ -43,7 +43,7 @@ include_once( get_stylesheet_directory() . '/lib/woocommerce/woocommerce-notice.
 // Child theme (do not remove).
 define( 'CHILD_THEME_NAME', 'Rubes Review' );
 define( 'CHILD_THEME_URL', 'https://capwebsolutions.com/' );
-define( 'CHILD_THEME_VERSION', '1.0.0' );
+define( 'CHILD_THEME_VERSION', '1.0.6' );
 
 // Enqueue Scripts and Styles.
 add_action( 'wp_enqueue_scripts', 'rubes_review_enqueue_scripts_styles' );
@@ -373,7 +373,7 @@ if (!current_user_can('edit_posts')) {
 }
 
 
-	/**
+/**
  * Display Posts Shortcode - Move image after title
  * @see https://www.billerickson.net/code/using-display-posts-shortcode-output-filter
  *
@@ -385,6 +385,14 @@ function be_dps_move_image_after_title( $output, $original_atts, $image, $title,
   add_filter( 'display_posts_shortcode_output', 'be_dps_move_image_after_title', 10, 9 );
 
   
+/**
+ * Get value of new-org-type query parm passed to form
+ */  
+add_filter('gform_field_value_new-org-type', 'populate_orgtype');
+function populate_orgtype( $value ){
+	return $value;
+}
+
 /* ref: https://docs.gravityforms.com/dynamically-populating-drop-down-fields/ */
 add_filter( 'gform_pre_render_12', 'rubes_populate_posts' );
 add_filter( 'gform_pre_validation_12', 'rubes_populate_posts' );
@@ -397,7 +405,9 @@ $thiscss = 'populate-organization';
 $thistype = 'organization'; 
 $thisplace = 'Select the Type of Organization to Evaluate'; 
 
-$mytype = 'agency';
+/* Go get query parm pass into form to determine what tpy eof organizaiton we are working with.  */
+$mytype = add_filter('gform_field_value_new-org-type', 'populate_orgtype');
+
 // Change query args based on type of org being populated
 switch ( $mytype ){
 	case 'agency' :
@@ -421,7 +431,6 @@ switch ( $mytype ){
 		$thisplace = 'Select the Continuing Ed Program to Evaluate'; 
 	break;
 }
-// var_dump($thiscss, $thisplace, $thistype);
     foreach ( $form['fields'] as &$field ) {
 
         if ( $field->type != 'select' || strpos( $field->cssClass, $thiscss ) === false ) {
@@ -433,9 +442,8 @@ switch ( $mytype ){
 			'post_type' => 'organization',
 			'org_type' => $thistype, 
 		);
-
+// var_dump($args);
 		$posts = get_posts( $args );
-
 
 		$choices = array();
 

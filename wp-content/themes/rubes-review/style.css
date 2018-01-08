@@ -1675,23 +1675,23 @@ body > div.site-container > header > div > div {
 
 /* Logo container */
 .front-page-img-container {
-	background: -webkit-linear-gradient(
+	/* background: -webkit-linear-gradient(
 	  left,
 	  rgba(221, 115, 115, 0.5),
 	  rgba(206, 32, 40, 1)
-	);
-	background: linear-gradient(
+	); */
+	/* background: linear-gradient(
 	  to right,
 	  rgba(221, 115, 115, 0.5),
 	  rgba(206, 32, 40, 1)
-	);
-	padding: 10px; 
+	); */
+	padding: 10px;
 	border-radius: 25px;
 	display: -ms-inline-grid;
 	display: inline-grid;
 	-ms-grid-columns: auto auto;
 	grid-template-columns: auto auto;
-  }
+	}
 .front-page-img-container img {
 	-ms-flex-item-align: center;
 	-ms-grid-row-align: center;
@@ -2164,9 +2164,13 @@ body > div.site-container > header > div > div {
 		margin: 0;
 		width: 100%;
 	}
-
 }
-
+/* Change background image on mobile view*/
+@media (max-width: 767px) {
+	.fl-builder-content .rubes-changeme > .fl-row-content-wrap  {
+		background-image:url(https://rubesreview.local/wp-content/uploads/blue-helix-mobile.jpg);
+	}
+}
 
 /* # Print Styles
 ---------------------------------------------------------------------------------------------------- */
