@@ -1807,8 +1807,18 @@ body > div.site-container > header > div > div {
 	font-size: 16px;
 	font-size: 1.6rem;
 	line-height: 1;
-	padding: 10px 0;
+	padding: 0;
 	text-align: center;
+}
+.site-footer .footer-alignleft {
+	float: left;
+	text-align: left;
+	margin-left: 80px;
+}
+.site-footer .footer-alignright {
+	float: right;
+	text-align: right;
+	margin-right: 80px;
 }
 
 .site-footer p {
@@ -2379,15 +2389,6 @@ a.ratings-archive-link {
 
 }
 
-.ratings-grid-wrap {
-
-}
-.ratings-heading-grouping {
-
-}
-.ratings-top5-grouping {
-
-}
 .site-header,
 .site-header .wrap {
 	max-width: 100%;
@@ -2517,25 +2518,22 @@ div.flexible-widgets.widget-area.spotlight-widget.widget-thirds > div {
 	h2 {
 		font-size: 4.5vw;
 	}
+
 	#genesis-content > article > div > div > div.fl-row.fl-row-full-width.fl-row-bg-photo.fl-node-5a0a0db900fef.fl-row-bg-overlay > div > div > div.fl-col-group.fl-node-5a0a0e1b6cd16 > div > div > div.fl-module.fl-module-heading.fl-node-5a0cb1ac846a8 > div > h3 > span,
 	.home-page h3 > span,
 	.home-page h3.fl-heading .fl-heading-text {
 		font-size: 3.5vw;
-	}	
+	}
+		
 	.home-page h4 > span {
 		font-size: 3.5vw;
 	}
 
-	
-	/* h5 {
-		font-size: 18px;
-		font-size: 1.8rem;
+	.site-footer .footer-alignleft a,
+	.site-footer .footer-alignright a,
+	body > div.site-container > footer > div > div.footer-alignleft > a:nth-child(1),
+	body > div.site-container > footer > div > div.footer-alignleft > a:nth-child(4) {
+		width: 100%;
+		margin: 0 auto;
 	}
-	
-	h6 {
-		font-size: 16px;
-		font-size: 1.6rem;
-	} */
-
-	
 }

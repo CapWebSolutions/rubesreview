@@ -321,7 +321,7 @@ add_shortcode('show_public_description', 'rubes_public_archive_description');
  * @author  Tom McFarlin
  * Author URI: https://tommcfarlin.com/redirect-non-admin/#code
  */
-function capweb_login_redirect( $redirect_to, $request, $user  ) {
+function rubes_login_redirect( $redirect_to, $request, $user  ) {
 	if ( ! is_wp_error( $user ) ) {
 	// do redirects on successful login
 		if ( $user->has_cap( 'administrator' ) || $user->has_cap( 'shop_manager' ) ) {
@@ -334,8 +334,22 @@ function capweb_login_redirect( $redirect_to, $request, $user  ) {
         return $redirect_to;
     }
 }
-add_filter( 'login_redirect', 'capweb_login_redirect', 10, 3 );
+add_filter( 'login_redirect', 'rubes_login_redirect', 10, 3 );
 
+/**
+ * Redirect users to the branded login page after logout.
+ *
+ * @since 	1.0
+ * @author  Matt Ryan
+ */
+function rubes_logout_redirect( $redirect_to, $request, $user  ) {
+	if ( $user->has_cap( 'administrator' ) ) {
+		return admin_url();
+	} else {
+        return '/login-to-rubes-review/';
+    }
+}
+add_filter( 'logout_redirect', 'rubes_logout_redirect', 10, 3 );
 
 /**
  * Display Featured Image floated to the right in single Posts.
