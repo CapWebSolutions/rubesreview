@@ -12,16 +12,11 @@
  */
 
  // Add spotlight posts class to the head.
-
-// add_filter( 'genesis_attr_content', 'rubesreview_add_spotlight_post_class' );
-function rubesreview_add_spotlight_post_class( $classes ) {
-	$classes[] = 'spotlight-content';
-	return $classes;
-}
-// add_filter( 'genesis_attr_sidebar-primary', 'rubesreview_add_css_class' );
-function rubesreview_add_css_class( $attributes ) {
-	$attributes['class'] = "spotlight-content";
-	return $classes;
+add_filter( 'genesis_attr_structural-wrap', 'rubes_my_custom_class' );  
+function rubes_my_custom_class( $attributes ) {
+	if ( is_single( ) )
+		$attributes['class'] = $attributes['class'] . ' spotlight-content';
+		return $attributes;
 }
 
 // Force Content/Sidebar layout.
@@ -29,5 +24,6 @@ add_filter( 'genesis_site_layout', '__genesis_return_content_sidebar' );
 
 // Add the BB template header to single post pages
 echo do_shortcode('[fl_builder_insert_layout id="616"]');
+echo do_shortcode('[fl_builder_insert_layout id="1969"]');
 
 genesis();

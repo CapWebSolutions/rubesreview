@@ -163,7 +163,7 @@ body > div {
 
 
 body {
-	background-color: #eee;
+	background-color: #fff;
 	color: #333;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 20px;
@@ -1031,19 +1031,34 @@ ul.archives > li {
     margin-left: 3rem;
 }
 
-.spotlight-content #genesis-content {
-	padding: 0 40px 0 40px;
-	width: 75%;
-}
-.spotlight-content #genesis-content > article > header  {
+.site-inner .spotlight-content {
+	/* outline: #00ff00 dotted thick;  Testing only */
 	margin-top: 40px;
+	padding: 0 80px 0 200px;
 }
-.spotlight-sidebar-primary #genesis-sidebar-primary {
-	width: 25%;
-	padding: 0 40px 40px 0;
+.site-inner .spotlight-content .content {
+	width: 1200px;
 }
-
-
+.site-inner .spotlight-content .logged-in-sidebar h3 {
+	font-size: 30px;
+	font-size: 3rem;
+	margin-left: 0;
+}
+.site-inner .spotlight-content .logged-in-sidebar h2 {
+	font-size: 30px;
+	font-size: 3rem;
+}
+.site-inner .spotlight-content .logged-in-sidebar a {
+	font-size: 20px;
+	font-size: 2rem;
+}
+.site-inner .spotlight-content .logged-in-sidebar ul > li {
+	list-style-type: disc;
+}
+.site-inner .spotlight-content .logged-in-sidebar li > span {
+	font-size: 20px;
+	font-size: 2rem;
+}
 /* # Plugins
 ---------------------------------------------------------------------------------------------------- */
 
@@ -1973,9 +1988,14 @@ margin-bottom: 0;
 
 @media only screen and (max-width: 1200px) {
 
+	.site-inner .spotlight-content .content,
 	.site-inner,
 	.wrap {
 		max-width: 960px;
+	}
+	
+	.site-inner .spotlight-content {
+		padding: 0;
 	}
 
 	.content-sidebar-sidebar .content-sidebar-wrap,
@@ -2009,6 +2029,7 @@ margin-bottom: 0;
 
 @media only screen and (max-width: 1023px) {
 
+	.site-inner .spotlight-content,
 	.site-inner,
 	.wrap {
 		max-width: 800px;

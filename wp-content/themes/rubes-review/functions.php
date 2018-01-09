@@ -101,6 +101,15 @@ add_theme_support( 'custom-header', array(
 	'flex-height'     => true,
 ) );
 
+//* Add support for structural wraps
+add_theme_support( 'genesis-structural-wraps', array(
+    'header',
+    'menu-primary',
+    'menu-secondary',
+    'site-inner',
+    'footer-widgets',
+    'footer'
+) );
 // Add support for custom background.
 add_theme_support( 'custom-background' );
 
