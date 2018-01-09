@@ -67,21 +67,23 @@ function load_single_template( $single_template ) {
 	if ( is_singular( 'agnt_eval' )  ) {
 		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-evaluation-agency.php';
 		return $single_template;
-	}
-	if ( is_singular( 'hosp_eval' ) ) {
+	} elseif ( is_singular( 'hosp_eval' ) ) {
 		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-evaluation-hospital.php';
 		return $single_template;
-	}
-	// if ( is_singular( 'cont_eval' ) ) {
+	} elseif ( is_singular( 'cont_eval' ) ) {
 	// 	$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-evaluation-continuinged.php';
 	// return $single_template;
-	// }
-	if ( is_singular( 'malp_eval' ) ) {
+	} elseif ( is_singular( 'malp_eval' ) ) {
 		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-evaluation-malpractice.php';
 		return $single_template;
-	}
-	if ( is_singular( 'organization' ) ) {
+	} elseif ( is_singular( 'organization' ) ) {
 		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-organization.php';
+		return $single_template;
+	} elseif ( is_singular( 'organization' ) ) {
+		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-organization.php';
+		return $single_template;
+	} elseif ( is_single() ) {
+		$single_template = get_stylesheet_directory() . '/single.php';
 		return $single_template;
 	}
 	return false;
@@ -176,54 +178,3 @@ function gform_dynamic_post_status($post_data, $form, $entry) {
 		
 	return $post_data;
 }
-
-
-/**
- * Taxonomy show_on filter
- * @author Bill Erickson
- * @param  object $cmb CMB2 object
- * @return bool        True/false whether to show the metabox
- */
-function be_taxonomy_show_on_filter( $cmb ) {
-	$tax_terms_to_show_on = $cmb->prop( 'show_on_terms', array() );
-	if ( empty( $tax_terms_to_show_on ) || ! $cmb->object_id() ) {
-		return false;
-	}
-	$post_id = $cmb->object_id();
-	$post = get_post( $post_id );
-	foreach( (array) $tax_terms_to_show_on as $taxonomy => $slugs ) {
-		if ( ! is_array( $slugs ) ) {
-			$slugs = array( $slugs );
-		}
-		$terms = $post
-			? get_the_terms( $post, $taxonomy )
-			: wp_get_object_terms( $post_id, $taxonomy );
-		if ( ! empty( $terms ) ) {
-			foreach( $terms as $term ) {
-				if ( in_array( $term->slug, $slugs, true ) ) {
-					// wp_die( '<code>: '. print_r( 'show it', true ) .'</code>' );
-					// Ok, show this metabox
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-
-/**
- * Conditionally displays a metabox when used as a callback in the 'show_on_cb' cmb2_box parameter
- *
- * @param  CMB2 $cmb CMB2 object.
- *
- * @return bool      True if metabox should show
- */
-function rr_eval_hosp_show_if_correct_eval_org_type( $cmb ) {
-	// Don't show this metabox if it's not the hosp eval_org_type
-	if ( get_option( 'page_on_front' ) !== $cmb->object_id ) {
-		return false;
-	}
-	return true;
-}
-

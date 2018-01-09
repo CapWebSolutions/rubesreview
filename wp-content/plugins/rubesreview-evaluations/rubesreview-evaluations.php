@@ -15,16 +15,15 @@
 // Get all the things
 require_once( dirname( __FILE__ ) . '/helper-functions.php' );
 
-
 /**
  * Get the bootstrap for CMB2!
  */
 require_once __DIR__ . '/cmb2/init.php';
+
 /**
  * Load in specific metaboxes for organization types and evaluations
  */
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-organizations.php' );
-// require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-conditional.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-agency.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-hospital.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-continuing-education.php' );

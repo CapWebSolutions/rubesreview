@@ -11,12 +11,23 @@
  * @link    http://my.studiopress.com/themes/genesis/
  */
 
-// This file handles single entries, but only exists for the sake of child theme forward compatibility.
+ // Add spotlight posts class to the head.
+
+// add_filter( 'genesis_attr_content', 'rubesreview_add_spotlight_post_class' );
+function rubesreview_add_spotlight_post_class( $classes ) {
+	$classes[] = 'spotlight-content';
+	return $classes;
+}
+// add_filter( 'genesis_attr_sidebar-primary', 'rubesreview_add_css_class' );
+function rubesreview_add_css_class( $attributes ) {
+	$attributes['class'] = "spotlight-content";
+	return $classes;
+}
+
+// Force Content/Sidebar layout.
+add_filter( 'genesis_site_layout', '__genesis_return_content_sidebar' );
 
 // Add the BB template header to single post pages
 echo do_shortcode('[fl_builder_insert_layout id="616"]');
 
-// Move image above post title in Genesis Framework 2.0
-// remove_action( 'genesis_entry_content', 'genesis_do_post_title', 8 );
-// add_action( 'genesis_entry_header', 'genesis_do_post_title', 8 );
 genesis();

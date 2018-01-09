@@ -1031,6 +1031,17 @@ ul.archives > li {
     margin-left: 3rem;
 }
 
+.spotlight-content #genesis-content {
+	padding: 0 40px 0 40px;
+	width: 75%;
+}
+.spotlight-content #genesis-content > article > header  {
+	margin-top: 40px;
+}
+.spotlight-sidebar-primary #genesis-sidebar-primary {
+	width: 25%;
+	padding: 0 40px 40px 0;
+}
 
 
 /* # Plugins
@@ -1825,6 +1836,85 @@ body > div.site-container > header > div > div {
 	margin-bottom: 0;
 }
 
+/* Customizer Stuff 
+---------------------------------------------------------------------------------------------------- */
+
+.page-template-default .nav-primary {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    /* text-align: center; */
+    float: right;
+    margin-top: 45px;
+}
+.page-id-20 .nav-primary {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    text-align: center; 
+float:none;
+margin-top: 0;
+}
+
+p.evaluation-organization,
+p.evaluation-org-address,
+p.evaluation-org-web {
+margin-bottom: 0;
+}
+
+#menu-credential-management {
+	text-align: right;
+}
+#menu-rubes-social-menu {
+	text-align: left;
+}
+
+.entry-content .fl-menu ul > li {
+	list-style-type: none;
+}
+
+
+#input_3_3_chosen {
+	border-radius: 0;
+}
+
+.page-id-147 .gform_wrapper .chosen-container-single .chosen-single {
+	border-radius: 0;
+}
+/* Form 12 - Organization Selection */
+#input_12_58,
+#input_12_56,
+#input_12_55,
+#input_12_54_chosen,
+#input_12_3_chosen,
+#input_12_18_chosen {
+	width: 59% !important;
+}
+#input_10_25 {
+	width: 39%;
+}
+.gform_wrapper ul li.field_description_below div.ginput_container_checkbox, body .gform_wrapper ul li.field_description_below div.ginput_container_radio {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.gform_wrapper .left_label .gfield_description, .gform_wrapper .left_label .instruction, .gform_wrapper .right_label .gfield_description, .gform_wrapper .right_label .instruction {
+	margin-left: 0;
+}
+
+/* Form 11 specifically */
+.gform_wrapper ul.gform_fields:not(.top_label) .gfield_label {
+	width: 40%;
+}
+.gform_wrapper .field_description_below .gfield_description {
+	padding-top: 0;
+}
+.gform_wrapper ul li.gfield {
+	margin-top: 0 !important;
+}
+
+#genesis-content > article a.image > img {
+	float: left;
+	text-align: left;
+	margin-right: 5px;
+}
 
 
 /* # Media Queries
