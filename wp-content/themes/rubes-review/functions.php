@@ -43,7 +43,7 @@ include_once( get_stylesheet_directory() . '/lib/woocommerce/woocommerce-notice.
 // Child theme (do not remove).
 define( 'CHILD_THEME_NAME', 'Rubes Review' );
 define( 'CHILD_THEME_URL', 'https://capwebsolutions.com/' );
-define( 'CHILD_THEME_VERSION', '1.0.6' );
+define( 'CHILD_THEME_VERSION', '1.6.2' );
 
 // Enqueue Scripts and Styles.
 add_action( 'wp_enqueue_scripts', 'rubes_review_enqueue_scripts_styles' );
