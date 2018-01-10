@@ -161,13 +161,13 @@ function rubes_custom_eval_validation($validation_result) {
 // Form 11 is Agency eval
 // Form 20 is Hospital eval
 // If Average Rating less than 3, eval is in holding, otherwises it is published. 
-// add_filter('gform_post_data_11', 'gform_dynamic_post_status', 10, 3);  // Agency Form
-// add_filter('gform_post_data_20', 'gform_dynamic_post_status', 10, 3);  // Hosp Form
-// add_filter('gform_post_data_21', 'gform_dynamic_post_status', 10, 3);  // CE Form
-// add_filter('gform_post_data_22', 'gform_dynamic_post_status', 10, 3);  // Malp Form
+add_filter('gform_post_data_11', 'gform_dynamic_post_status', 10, 3);  // Agency Form - field 52
+add_filter('gform_post_data_20', 'gform_dynamic_post_status', 10, 3);  // Hosp Form - field 52
+add_filter('gform_post_data_21', 'gform_dynamic_post_status', 10, 3);  // CE Form - field 52
+add_filter('gform_post_data_22', 'gform_dynamic_post_status', 10, 3);  // Malp Form - field 52
 
 function gform_dynamic_post_status($post_data, $form, $entry) {
-// 52 is the Average Rating field on the Agency & Hospital eval
+// 52 is the Rating Average field on the eval forms
 	if( $entry[52] ) {
 		if ( $entry[52] < 3) {
 				$post_data['post_status'] = 'pending';
@@ -175,6 +175,5 @@ function gform_dynamic_post_status($post_data, $form, $entry) {
 				$post_data['post_status'] = 'publish';
 		}
 	}
-		
 	return $post_data;
 }
