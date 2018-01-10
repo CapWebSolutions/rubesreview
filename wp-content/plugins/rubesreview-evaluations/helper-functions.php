@@ -23,7 +23,6 @@ function adds_new_evaluations_image_sizes() {
 	}
 }
 
-
  /**
  * load evaluation archive template
  * @param  template $archive_template requires Genesis
@@ -31,11 +30,17 @@ function adds_new_evaluations_image_sizes() {
  * @since  1.2.0
  */
 function load_archive_template( $archive_template ) {
-	if ( is_post_type_archive( array('agnt_eval', 'hosp_eval', 'cont_eval', 'malp_eval' ) ) ) {
-		$archive_template = dirname( __FILE__ ) . '/metaboxes/views/archive-evaluation.php';
+	if ( is_post_type_archive( array('agnt_eval') ) ) {
+		$archive_template = dirname( __FILE__ ) . '/views/single-evaluation-agency.php';
+	}
+	if ( is_post_type_archive( array('hosp_eval' ) ) ) {
+		$archive_template = dirname( __FILE__ ) . '/views/single-evaluation-hospital.php';
+	}
+	if ( is_post_type_archive( array('cont_eval', 'malp_eval' ) ) ) {
+		$archive_template = dirname( __FILE__ ) . '/views/archive-evaluation.php';
 	}
 	if ( is_post_type_archive( 'organization' ) ) {
-		$archive_template = dirname( __FILE__ ) . '/metaboxes/views/archive-organization.php';
+		$archive_template = dirname( __FILE__ ) . '/views/archive-organization.php';
 	}
 	return $archive_template;
 
@@ -49,8 +54,8 @@ function load_archive_template( $archive_template ) {
  */
 function load_taxonomy_archive_template( $taxonomy_archive_template ) {
 	if ( is_archive( 'org_type', 'eval_org_type' ) ) {
-		// $taxonomy_archive_template = dirname( __FILE__ ) . '/metaboxes/views/taxonomy-orgtype.php';
-		$taxonomy_archive_template = dirname( __FILE__ ) . '/metaboxes/views/archive-organization.php';
+		// $taxonomy_archive_template = dirname( __FILE__ ) . '/views/taxonomy-orgtype.php';
+		$taxonomy_archive_template = dirname( __FILE__ ) . '/views/archive-organization.php';
 	}
 
 	return $taxonomy_archive_template;
@@ -64,23 +69,23 @@ function load_taxonomy_archive_template( $taxonomy_archive_template ) {
  * @since 1.2.0
  */
 function load_single_template( $single_template ) {
-	if ( is_singular( 'agnt_eval' )  ) {
-		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-evaluation-agency.php';
+	if ( is_singular( 'agnt_eval' )  || is_post_type_archive('agnt_eval') ) {
+		$single_template = dirname( __FILE__ ) . '/views/single-evaluation-agency.php';
 		return $single_template;
 	} elseif ( is_singular( 'hosp_eval' ) ) {
-		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-evaluation-hospital.php';
+		$single_template = dirname( __FILE__ ) . '/views/single-evaluation-hospital.php';
 		return $single_template;
 	} elseif ( is_singular( 'cont_eval' ) ) {
-	// 	$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-evaluation-continuinged.php';
+	// 	$single_template = dirname( __FILE__ ) . '/views/single-evaluation-continuinged.php';
 	// return $single_template;
 	} elseif ( is_singular( 'malp_eval' ) ) {
-		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-evaluation-malpractice.php';
+		$single_template = dirname( __FILE__ ) . '/views/single-evaluation-malpractice.php';
 		return $single_template;
 	} elseif ( is_singular( 'organization' ) ) {
-		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-organization.php';
+		$single_template = dirname( __FILE__ ) . '/views/single-organization.php';
 		return $single_template;
 	} elseif ( is_singular( 'organization' ) ) {
-		$single_template = dirname( __FILE__ ) . '/metaboxes/views/single-organization.php';
+		$single_template = dirname( __FILE__ ) . '/views/single-organization.php';
 		return $single_template;
 	} elseif ( is_single() ) {
 		$single_template = get_stylesheet_directory() . '/single.php';
@@ -177,3 +182,12 @@ function gform_dynamic_post_status($post_data, $form, $entry) {
 	}
 	return $post_data;
 }
+
+/**	
+ * Output a single Agency evalutaion 
+ * 
+ */
+
+ function display_single_rubes_eval( $args ) {
+
+ }

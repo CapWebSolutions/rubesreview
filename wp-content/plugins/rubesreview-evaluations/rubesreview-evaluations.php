@@ -29,10 +29,13 @@ require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-hospital.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-continuing-education.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-malpractice-co.php' );
 
-require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-hospital.php' );
-require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-continuing-education.php' );
-require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-malpractice-co.php' );
-
+/**
+ * Load in organization specific handlers
+ */
+require_once( dirname( __FILE__ ) . '/lib/display-agency.php' );
+require_once( dirname( __FILE__ ) . '/lib/display-hospital.php' );
+// require_once( dirname( __FILE__ ) . '/lib/display-continuing-education.php' );
+// require_once( dirname( __FILE__ ) . '/lib/display-malpractice-co.php' );
 
 // Load styles & scripts
 function rubesreview_evaluations_enqueue() {
