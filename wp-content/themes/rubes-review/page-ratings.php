@@ -43,7 +43,7 @@ function rubes_ratings_loop() {
 	) );
 
 	printf('<div class="ratings-content-wrapper">');
-	$rating_displays = array( 'Ratings Leaderboard', 'Most Recent Ratings' );
+	$rating_displays = array( 'Most Recent Ratings', 'Ratings Leaderboard' );
 	foreach ( $rating_displays as $rating_display_value ) {
 
 	printf('<div class="ratings-section-wrapper">');
@@ -137,7 +137,7 @@ function print_average_ratings_line( $args, $orgvalue, $prefix ) {
             $rating_content = sprintf('<div class="evaluation-org-stars-%s"><a href="%s">%s &mdash; %s</a></div>', $rating_average, get_permalink( $post_id ), $eval_org_name_front, $eval_org_name_location  );
 			printf( '<div class="ratings-line">%s</div>', $rating_content  );
         }
-        if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/%s' . '">More %s Evaluations</a>', $my_term_slug, ucwords($my_term) );
+        if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/%s' . '">All %s Evaluations</a>', $my_term_slug, ucwords($my_term) );
     
     } else {
         $rating_content = sprintf('No evaluations found.', $org_name_title );	
