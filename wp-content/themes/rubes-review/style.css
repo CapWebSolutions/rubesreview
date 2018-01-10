@@ -1660,14 +1660,6 @@ p.entry-meta {
 	padding: 10px;
 	border-radius: 15px;
 }
-/* #custom_html-2 > div > div > div > div > a.button {
-	position: relative; 
-	top: -300px;
-	width: 20%;
-	text-align: center;
-	display: block;
-	margin: 0 auto;
-} */
 
 p.more-from-category {
 	text-align: right;
@@ -1682,9 +1674,6 @@ p.more-from-category a {
 #custom_html-2 {
 	margin-bottom: 0;
 }
-/* body.home > div.site-container > div.site-inner {
-	display: none;
-} */
 body > div.site-container > div.spotlight-cta-widget > div {
 	max-width: 100%;
 }
@@ -1701,16 +1690,6 @@ body > div.site-container > header > div > div {
 
 /* Logo container */
 .front-page-img-container {
-	/* background: -webkit-linear-gradient(
-	  left,
-	  rgba(221, 115, 115, 0.5),
-	  rgba(206, 32, 40, 1)
-	); */
-	/* background: linear-gradient(
-	  to right,
-	  rgba(221, 115, 115, 0.5),
-	  rgba(206, 32, 40, 1)
-	); */
 	padding: 10px;
 	border-radius: 25px;
 	display: -ms-inline-grid;
@@ -1724,12 +1703,10 @@ body > div.site-container > header > div > div {
 	align-self: center;
   }
   
-  
 /* ## Ratings  Page
 --------------------------------------------- */
   .inline { 
   display: inline-block; 
-  /* border: 1px solid red;  */
   margin:0 10px;
   }
   .rating-entry {
@@ -1906,31 +1883,55 @@ margin-bottom: 0;
 #input_10_25 {
 	width: 39%;
 }
-.gform_wrapper ul li.field_description_below div.ginput_container_checkbox, body .gform_wrapper ul li.field_description_below div.ginput_container_radio {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-.gform_wrapper .left_label .gfield_description, .gform_wrapper .left_label .instruction, .gform_wrapper .right_label .gfield_description, .gform_wrapper .right_label .instruction {
-	margin-left: 0;
-}
-
-/* Form 11 specifically */
-.gform_wrapper ul.gform_fields:not(.top_label) .gfield_label {
-	width: 40%;
-}
-.gform_wrapper .field_description_below .gfield_description {
-	padding-top: 0;
-}
-.gform_wrapper ul li.gfield {
-	margin-top: 0 !important;
-}
 
 #genesis-content > article a.image > img {
 	float: left;
 	text-align: left;
 	margin-right: 5px;
 }
+/**	
+ * Form ID 11 agency eval form
+ * Form ID 20 hospital eval form
+ * Form ID 21 continuing ed eval form
+ * Form ID 22 malpractice company eval form
+ */
+#gform_wrapper_11.gform_wrapper .left_label .gfield_description, 
+#gform_wrapper_11.left_label .instruction, 
+#gform_wrapper_11.right_label .gfield_description, 
+#gform_wrapper_11.right_label .instruction,
+#gform_wrapper_20.gform_wrapper .left_label .gfield_description, 
+#gform_wrapper_20.left_label .instruction, 
+#gform_wrapper_20.right_label .gfield_description, 
+#gform_wrapper_20.right_label .instruction,
+#gform_wrapper_21.gform_wrapper .left_label .gfield_description, 
+#gform_wrapper_21.left_label .instruction, 
+#gform_wrapper_21.right_label .gfield_description, 
+#gform_wrapper_21.right_label .instruction,
+#gform_wrapper_22.gform_wrapper .left_label .gfield_description, 
+#gform_wrapper_22.left_label .instruction, 
+#gform_wrapper_22.right_label .gfield_description, 
+#gform_wrapper_22.right_label .instruction  {
+	margin-left: 0;
+}
+#gform_wrapper_11.gform_wrapper .field_description_below .gfield_description,
+#gform_wrapper_20.gform_wrapper .field_description_below .gfield_description,
+#gform_wrapper_21.gform_wrapper .field_description_below .gfield_description,
+#gform_wrapper_22.gform_wrapper .field_description_below .gfield_description {
+	padding-top: 0;
+}
 
+#gform_wrapper_11 ul.gform_fields:not(.top_label) .gfield_label,
+#gform_wrapper_20 ul.gform_fields:not(.top_label) .gfield_label,
+#gform_wrapper_21 ul.gform_fields:not(.top_label) .gfield_label,
+#gform_wrapper_22 ul.gform_fields:not(.top_label) .gfield_label {
+	width: 50%;
+}
+#gform_wrapper_11 ul li.gfield,
+#gform_wrapper_20 ul li.gfield,
+#gform_wrapper_21 ul li.gfield,
+#gform_wrapper_22 ul li.gfield {
+	margin-top: 0 !important;
+}
 
 /* # Media Queries
 ---------------------------------------------------------------------------------------------------- */
