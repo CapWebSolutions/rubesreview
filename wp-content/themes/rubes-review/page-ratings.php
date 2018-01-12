@@ -4,7 +4,7 @@
  *
  * This file adds the Ratings Leaderboard page template to the Rube's Review Theme.
  *
- * Template Name: Ratings Leaderboard2
+ * Template Name: Ratings Leaderboard
  * Template Post Type: page
  *
  * @package rubesreview
@@ -16,7 +16,7 @@
 // Add leaderboard page body class to the head.
 add_filter( 'body_class', 'rubesreview_add_body_class' );
 function rubesreview_add_body_class( $classes ) {
-	$classes[] = 'leaderboard-page';
+	$classes[] = 'ratings-page';
 	return $classes;
 }
 
@@ -30,8 +30,6 @@ remove_action( 'genesis_loop', 'genesis_do_loop' );
 
 //* Custom Loop
 add_action( 'genesis_loop',  __NAMESPACE__ . '\rubes_ratings_loop' );
-
-// add_shortcode( 'output_page_ratings', __NAMESPACE__ . '\rubes_ratings_loop' );
 function rubes_ratings_loop() {
 
 	global $wp_query;
@@ -39,7 +37,8 @@ function rubes_ratings_loop() {
 //* dump out the Beaver header & menu template  
 	FLBuilder::render_query( array(
 		'post_type' => 'fl-builder-template',
-		'p'         => 622 // Beaver Template ID
+		'p'         => 1226 // Beaver Template ID
+	// 	'p'         => 622 // Beaver Template ID
 	) );
 
 	printf('<div class="ratings-content-wrapper">');

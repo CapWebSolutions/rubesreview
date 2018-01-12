@@ -97,9 +97,18 @@ add_theme_support( 'genesis-accessibility', array( '404-page', 'drop-down-menu',
 add_theme_support( 'genesis-responsive-viewport' );
 
 // Add support for custom header.
+// add_theme_support( 'custom-header', array(
+// 	'width'           => 714,
+// 	'height'          => 384,
+// 	'header-selector' => '.site-title a',
+// 	'header-text'     => false,
+// 	'flex-height'     => true,
+// ) );
+
+// Try split header with center logo
 add_theme_support( 'custom-header', array(
-	'width'           => 714,
-	'height'          => 384,
+	'width'           => 600,
+	'height'          => 197,
 	'header-selector' => '.site-title a',
 	'header-text'     => false,
 	'flex-height'     => true,
@@ -114,6 +123,7 @@ add_theme_support( 'genesis-structural-wraps', array(
     'footer-widgets',
     'footer'
 ) );
+
 // Add support for custom background.
 add_theme_support( 'custom-background' );
 
@@ -126,16 +136,60 @@ add_theme_support( 'genesis-footer-widgets', 3 );
 // Add Image Sizes.
 add_image_size( 'featured-image', 720, 400, TRUE );
 
+add_theme_support( 'genesis-menus', array(
+	'primary'   => __( 'Primary Navigation Menu', 'rubes-review' ),
+	'secondary' => __( 'Secondary Navigation Menu', 'rubes-review' ),
+	'footer'    => __( 'Footer Navigation Menu', 'rubes-review' ),
+) );
+
 // Rename primary and secondary navigation menus.
-add_theme_support( 'genesis-menus', array( 'primary' => __( 'After Header Menu', 'rubes-review' ), 'secondary' => __( 'Footer Menu', 'rubes-review' ) ) );
+// add_theme_support( 'genesis-menus', array( 
+// 	'primary' => __( 'After Header Menu', 'rubes-review' ), 
+// 	'secondary' => __( 'Footer Menu', 'rubes-review' ) ) );
 
 // Reposition the primary navigation menu.
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
 add_action( 'genesis_after_page-widget_widget_area', 'genesis_do_nav', 12 );
 
+// Reposition sub nav
+// remove_action('genesis_after_header', );
+// add_action('genesis_footer', );
+
+// Add typical attributes for footer navigation elements.
+add_filter( 'genesis_attr_nav-footer', 'genesis_attributes_nav' );
+
+// Display Footer Navigation Menu above footer content
+add_action( 'genesis_footer', 'genesis_sample_do_footernav', 5 );
+/**
+ * Echo the "Footer Navigation" menu.
+ *
+ * @uses genesis_nav_menu() Display a navigation menu.
+ * @uses genesis_nav_menu_supported() Checks for support of specific nav menu.
+ */
+function genesis_sample_do_footernav() {
+
+	// Do nothing if menu not supported.
+	if ( ! genesis_nav_menu_supported( 'footer' ) ) {
+		return;
+	}
+
+	$class = 'menu genesis-nav-menu menu-footer';
+	if ( genesis_superfish_enabled() ) {
+		$class .= ' js-superfish';
+	}
+
+	genesis_nav_menu( array(
+		'theme_location' => 'footer',
+		'menu_class'     => $class,
+	) );
+
+}
+
+
+// Show primary nav on all pages except front page
 add_action('get_header', 'child_add_nav_to_interior_pages');
 function child_add_nav_to_interior_pages() {
-	if ( !is_Page('20') ) {
+	if ( !is_page('front-page') ) {
 		add_action( 'genesis_header', 'genesis_do_nav', 12 );
 	}
 }
@@ -356,3 +410,52 @@ function be_dps_move_image_after_title( $output, $original_atts, $image, $title,
   }
 add_filter( 'display_posts_shortcode_output', 'be_dps_move_image_after_title', 10, 9 );
 
+// This for split header test
+// if header image is set, remove Header Right widget area and inject CSS to apply the header image as background image for home menu item and more
+add_action( 'wp_head', 'sk_home_menu_item_background_image' );
+function sk_home_menu_item_background_image() {
+
+    if ( get_header_image() ) {
+        // Remove the header right widget area
+        unregister_sidebar( 'header-right' ); ?>
+
+        <style type="text/css">
+            .nav-primary li.menu-item-home a {
+                background-image: url(<?php echo get_header_image(); ?>);
+                text-indent: -9999em;
+                width: 300px;
+                height: 97px;
+            }
+
+            @media only screen and (min-width: 1024px) {
+                .site-header > .wrap {
+                    padding: 0;
+                }
+
+                .title-area {
+                    display: none;
+                }
+
+                .nav-primary {
+                    padding: 20px 0;
+                }
+
+                .menu-primary {
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: center;
+                    -webkit-justify-content: center;
+                        -ms-flex-pack: center;
+                            justify-content: center; /* center flex items horizontally */
+                    -webkit-box-align: center;
+                    -webkit-align-items: center;
+                        -ms-flex-align: center;
+                            align-items: center; /* center flex items vertically */
+                }
+            }
+        </style>
+    <?php }
+
+}

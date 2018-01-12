@@ -1275,6 +1275,7 @@ ul.archives > li {
 
 .header-image .site-title > a {
 	/* background-position: center !important; */
+	background: url(images/rubeslogo.png) no-repeat left;
 	background-size: contain !important;
 	float: left;
 	min-height: 80px;
@@ -1296,7 +1297,7 @@ ul.archives > li {
 .header-image .site-description,
 .header-image .site-title {
 	display: block;
-	text-indent: -9999px;
+	/* text-indent: -9999px; */
 }
 
 /* ## Widget Area
@@ -1453,7 +1454,7 @@ ul.archives > li {
 --------------------------------------------- */
 
 .entry,
-.leaderboard-page {
+.ratings-page {
 	background-color: #fff;
 	margin-bottom: 40px;
 	padding: 70px 80px;
@@ -1810,8 +1811,12 @@ body > div.site-container > header > div > div {
 	font-size: 16px;
 	font-size: 1.6rem;
 	line-height: 1;
-	padding: 0;
+	padding-top: 10px;
 	text-align: center;
+}
+#menu-footer {
+	font-size: 16px;
+	font-size: 1.6rem; 
 }
 .site-footer .footer-alignleft {
 	float: left;
@@ -1835,8 +1840,8 @@ body > div.site-container > header > div > div {
     background-color: #fff;
     border-top: 1px solid #eee;
     /* text-align: center; */
-    float: right;
-    margin-top: 45px;
+    /* float: right; */
+    margin-top: 25px;
 }
 .page-id-20 .nav-primary {
     background-color: #fff;
@@ -2647,4 +2652,30 @@ div.flexible-widgets.widget-area.spotlight-widget.widget-thirds > div {
 		width: 100%;
 		margin: 0 auto;
 	}
+}
+
+
+
+
+/* This for split header test */
+.header-image .site-title > a {
+    min-height: 97x;
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .nav-primary li.menu-item-home a {
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin: 0 10px;
+    }
+
+}
+
+@media only screen and (max-width: 1023px) {
+
+    .nav-primary .genesis-nav-menu .menu-item.menu-item-home {
+        display: none;
+    }
+
 }

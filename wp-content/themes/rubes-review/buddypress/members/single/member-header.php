@@ -9,7 +9,7 @@
 
 FLBuilder::render_query( array(
 	'post_type' => 'fl-builder-template',
-	'p'         => 1199 // Breaver Header Template ID for Social Profile Pages
+	'p'         => 2056 // old - 1199 Breaver Header Template ID for Social Profile Pages
 ) );
 ?>
 
