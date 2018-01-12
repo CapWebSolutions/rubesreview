@@ -62,6 +62,10 @@ function rubes_review_enqueue_scripts_styles() {
 
 }
 
+// Pull in all supporting functions.
+include_once( get_stylesheet_directory() . '/lib/helper-functions-gravityforms.php' );
+include_once( get_stylesheet_directory() . '/lib/helper-functions-ratings.php' );
+
 // Define our responsive menu settings.
 function rubes_review_responsive_menu_settings() {
 
@@ -136,11 +140,6 @@ function child_add_nav_to_interior_pages() {
 	}
 }
 
-// Remove the secondary navigation menu.
-// remove_action( 'genesis_after_header', 'genesis_do_subnav' );
-// add_action( 'genesis_footer', 'genesis_do_subnav', 5 );
-
-
 // Modify size of the Gravatar in the author box.
 add_filter( 'genesis_author_box_gravatar_size', 'rubes_review_author_box_gravatar' );
 function rubes_review_author_box_gravatar( $size ) {
@@ -150,11 +149,8 @@ function rubes_review_author_box_gravatar( $size ) {
 // Modify size of the Gravatar in the entry comments.
 add_filter( 'genesis_comment_list_args', 'rubes_review_comments_gravatar' );
 function rubes_review_comments_gravatar( $args ) {
-
 	$args['avatar_size'] = 60;
-
 	return $args;
-
 }
 
 // Set up widget areas for front page. 
@@ -235,42 +231,6 @@ function custom_widget_area_class( $id ) {
     return $class;
 }
 
-/**********************************
- *
- * Replace Header Site Title as background image with Inline Logo
- *
- * @author AlphaBlossom / Tony Eppright, Neil Gee
- * @link http://www.alphablossom.com/a-better-wordpress-genesis-responsive-logo-header/
- * @link https://wpbeaches.com/adding-in-a-responsive-html-logoimage-header-via-the-customizer-for-genesis/
- *
- * @edited by Sridhar Katakam
- * @link https://sridharkatakam.com/
- *
-************************************/
-// add_filter( 'genesis_seo_title', __NAMESPACE__ . '\custom_header_inline_logo', 10, 3 );
-function custom_header_inline_logo( $title, $inside, $wrap ) {
-
-	if ( get_header_image() ) {
-		$logo = '<img  src="' . get_header_image() . '" width="' . esc_attr( get_custom_header()->width ) . '" height="' . esc_attr( get_custom_header()->height ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . ' Homepage">';
-	} else {
-		$logo = get_bloginfo( 'name' );
-	}
-
-	$inside = sprintf( '<a href="%s">%s<span class="screen-reader-text">%s</span></a>', trailingslashit( home_url() ), $logo, get_bloginfo( 'name' ) );
-
-	// Determine which wrapping tags to use
-	$wrap = genesis_is_root_page() && 'title' === genesis_get_seo_option( 'home_h1_on' ) ? 'h1' : 'p';
-
-	// A little fallback, in case an SEO plugin is active
-	$wrap = genesis_is_root_page() && ! genesis_get_seo_option( 'home_h1_on' ) ? 'h1' : $wrap;
-
-	// And finally, $wrap in h1 if HTML5 & semantic headings enabled
-	$wrap = genesis_html5() && genesis_get_seo_option( 'semantic_headings' ) ? 'h1' : $wrap;
-
-	return sprintf( '<%1$s %2$s>%3$s</%1$s>', $wrap, genesis_attr( 'site-title' ), $inside );
-
-}
-
 /**
  * Remove Genesis Page Templates
  *
@@ -287,13 +247,6 @@ function be_remove_genesis_page_templates( $page_templates ) {
 }
 add_filter( 'theme_page_templates', 'be_remove_genesis_page_templates' );
 
-//* Customize the entry meta in the entry footer (requires HTML5 theme support)
-// add_filter( 'genesis_post_meta', 'sp_post_meta_filter' );
-// function sp_post_meta_filter($post_meta) {
-// 	$post_meta = '[post_categories] [post_tags]';
-// 	return $post_meta;
-// }
-
 // Customize entry meta header
 // ref: https://wpbeaches.com/change-genesis-post-entry-footer-meta-output/
 add_filter( 'genesis_post_info', 'themeprefix_post_info_filter' );
@@ -309,7 +262,6 @@ function themeprefix_post_meta_filter( $post_meta ) {
 }
 
 // Display the archive description with a shortcode
-
 function rubes_public_archive_description() { 
 	$catlist = get_terms( 'category' );
 	if ( ! empty( $catlist ) ) {
@@ -370,14 +322,12 @@ function sk_show_featured_image_single_posts() {
 	if ( ! is_singular( 'post' ) ) {
 		return;
 	}
-
 	$image_args = array(
 		'size' => 'featured-imaage',
 		'attr' => array(
 			'class' => 'aligncenter',
 		),
 	);
-
 	genesis_image( $image_args );
 }
 add_action( 'genesis_entry_header', 'sk_show_featured_image_single_posts', 9 );
@@ -395,7 +345,6 @@ if (!current_user_can('edit_posts')) {
 	add_filter('show_admin_bar', '__return_false');
 }
 
-
 /**
  * Display Posts Shortcode - Move image after title
  * @see https://www.billerickson.net/code/using-display-posts-shortcode-output-filter
@@ -405,78 +354,5 @@ function be_dps_move_image_after_title( $output, $original_atts, $image, $title,
 	$output = '<' . $inner_wrapper . ' class="' . implode( ' ', $class ) . '">' . $title . $image . $excerpt . '</' . $inner_wrapper . '>';
 	return $output;
   }
-  add_filter( 'display_posts_shortcode_output', 'be_dps_move_image_after_title', 10, 9 );
+add_filter( 'display_posts_shortcode_output', 'be_dps_move_image_after_title', 10, 9 );
 
-  
-/**
- * Get value of new-org-type query parm passed to form
- */  
-add_filter('gform_field_value_new-org-type', 'populate_orgtype');
-function populate_orgtype( $value ){
-	return $value;
-}
-
-/* ref: https://docs.gravityforms.com/dynamically-populating-drop-down-fields/ */
-add_filter( 'gform_pre_render_12', 'rubes_populate_posts' );
-add_filter( 'gform_pre_validation_12', 'rubes_populate_posts' );
-add_filter( 'gform_pre_submission_filter_12', 'rubes_populate_posts' );
-add_filter( 'gform_admin_pre_render_12', 'rubes_populate_posts' );
-
-function rubes_populate_posts( $form ) {
-
-$thiscss = 'populate-organization';
-$thistype = 'organization'; 
-$thisplace = 'Select the Type of Organization to Evaluate'; 
-
-/* Go get query parm pass into form to determine what tpy eof organizaiton we are working with.  */
-$mytype = add_filter('gform_field_value_new-org-type', 'populate_orgtype');
-
-// Change query args based on type of org being populated
-switch ( $mytype ){
-	case 'agency' :
-		$thiscss = 'populate-agency';
-		$thistype = 'agency';
-		$thisplace = 'Select the Agency to Evaluate'; 
-	break;
-	case 'hospital' :
-		$thiscss = 'populate-hospital';
-		$thistype = 'hospital';
-		$thisplace = 'Select the Hospital to Evaluate'; 
-	break;
-	case 'malpractice':
-		$thiscss = 'populate-malpractice';
-		$thistype = 'malpractice-company'; 
-		$thisplace = 'Select the Malpractice Company to Evaluate'; 
-	break;
-	case 'continuinged':
-		$thiscss = 'populate-continuing-education';
-		$thistype = 'continuing-education'; 
-		$thisplace = 'Select the Continuing Ed Program to Evaluate'; 
-	break;
-}
-    foreach ( $form['fields'] as &$field ) {
-
-        if ( $field->type != 'select' || strpos( $field->cssClass, $thiscss ) === false ) {
-            continue;
-		}
-		$args = array(
-			'numberposts' => -1,
-			'post_status' => 'publish',
-			'post_type' => 'organization',
-			'org_type' => $thistype, 
-		);
-// var_dump($args);
-		$posts = get_posts( $args );
-
-		$choices = array();
-
-		foreach ( $posts as $post ) {
-			// var_dump($post);
-			$choices[] = array( 'text' => $post->post_title, 'value' => $post->post_title );
-		}
-
-		$field->choices = $choices;
-		$field->placeholder = $thisplace;
-	}
-    return $form;
-}
