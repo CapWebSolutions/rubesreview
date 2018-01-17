@@ -21,12 +21,14 @@ function rubesreview_add_body_class( $classes ) {
 }
 
 // Force Content/Sidebar layout.
-add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_content_sidebar' );
+// add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_content_sidebar' );
 
 /**
  * Remove the standard loop
  */
 remove_action( 'genesis_loop', 'genesis_do_loop' );
+
+// add_shortcode( 'output_page_ratings', __NAMESPACE__ . '\rubes_ratings_loop' );
 
 //* Custom Loop
 add_action( 'genesis_loop',  __NAMESPACE__ . '\rubes_ratings_loop' );
@@ -37,8 +39,8 @@ function rubes_ratings_loop() {
 //* dump out the Beaver header & menu template  
 	FLBuilder::render_query( array(
 		'post_type' => 'fl-builder-template',
-		'p'         => 1226 // Beaver Template ID
-	// 	'p'         => 622 // Beaver Template ID
+		// 'p'         => 1226 // Beaver Template ID
+		'p'         => 622 // Beaver Template ID
 	) );
 
 	printf('<div class="ratings-content-wrapper">');
@@ -50,10 +52,22 @@ function rubes_ratings_loop() {
 	printf('<div class="ratings-section-heading">%s</div>', $rating_display_value );
 	printf('<div class="ratings-wrapper">');
 	$orgtypes = array( 
-		array('slug' => 'agency', 'pref' => 'agnt_', 'evaltype' => 'agency', 'posttype'=>'agnt_eval'),
-		array('slug' => 'hospital', 'pref' => 'hosp_', 'evaltype' => 'hospital', 'posttype'=>'hosp_eval'), 
-		array('slug' => 'continuing-education', 'pref' => 'cont_', 'evaltype' => 'continuing ed', 'posttype'=>'cont_eval'), 
-		array('slug' => 'malpractice','pref' => 'malp_', 'evaltype' => 'malpractice company', 'posttype'=>'malp_eval' ),
+		array('slug' => 'agency', 
+			'pref' => 'agnt_', 
+			'evaltype' => 'agency', 
+			'posttype'=>'agnt_eval'),
+		array('slug' => 'hospital', 
+			'pref' => 'hosp_', 
+			'evaltype' => 'hospital', 
+			'posttype'=>'hosp_eval'), 
+		array('slug' => 'continuing-education', 
+			'pref' => 'cont_', 
+			'evaltype' => 'continuing ed', 
+			'posttype'=>'cont_eval'), 
+		array('slug' => 'malpractice',
+			'pref' => 'malp_', 
+			'evaltype' => 'malpractice company', 
+			'posttype'=>'malp_eval' ),
 	);
 	switch ( $rating_display_value ) {
 		case 'Most Recent Ratings':

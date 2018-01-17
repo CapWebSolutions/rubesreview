@@ -4,7 +4,7 @@
  *
  */
 
-add_action( 'cmb2_init', 'cws_register_malp_evaluation_metabox' );
+add_action( 'cmb2_admin_init', 'cws_register_malp_evaluation_metabox' );
 function cws_register_malp_evaluation_metabox() {
 
 	$prefix = 'rr_eval_malp_';

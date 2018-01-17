@@ -76,8 +76,8 @@ function load_single_template( $single_template ) {
 		$single_template = dirname( __FILE__ ) . '/views/single-evaluation-hospital.php';
 		return $single_template;
 	} elseif ( is_singular( 'cont_eval' ) ) {
-	// 	$single_template = dirname( __FILE__ ) . '/views/single-evaluation-continuinged.php';
-	// return $single_template;
+		$single_template = dirname( __FILE__ ) . '/views/single-evaluation-continuinged.php';
+		return $single_template;
 	} elseif ( is_singular( 'malp_eval' ) ) {
 		$single_template = dirname( __FILE__ ) . '/views/single-evaluation-malpractice.php';
 		return $single_template;
@@ -131,10 +131,10 @@ function rubes_custom_validation($validation_result){
 	eval Post name format is {Agency Name:55}_{user:user_login} 
 */
 
-// add_filter('gform_validation_11', 'rubes_custom_eval_validation');  // agency eval form
-// add_filter('gform_validation_20', 'rubes_custom_eval_validation');  // hospital eval form
-// add_filter('gform_validation_21', 'rubes_custom_eval_validation');  // continuing ed eval form
-// add_filter('gform_validation_22', 'rubes_custom_eval_validation');  // malpractice company eval form
+add_filter('gform_validation_11', 'rubes_custom_eval_validation');  // agency eval form
+add_filter('gform_validation_20', 'rubes_custom_eval_validation');  // hospital eval form
+add_filter('gform_validation_21', 'rubes_custom_eval_validation');  // continuing ed eval form
+add_filter('gform_validation_22', 'rubes_custom_eval_validation');  // malpractice company eval form
 
 function rubes_custom_eval_validation($validation_result) {
 	$current_user = wp_get_current_user();

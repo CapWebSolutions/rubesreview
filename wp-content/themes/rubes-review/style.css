@@ -1170,10 +1170,7 @@ ul.archives > li {
 .organization-org-address {
 	margin-left:100px;
 }
-.evaluation-image,
-.organization-image {}
 
-.evaluation-organization { color:red;} 
 .evaluation-name {
 	font-size: larger;
 	font-weight: 800;
@@ -1185,11 +1182,6 @@ ul.archives > li {
 	margin-left: -50px;
 	padding-bottom: 20px; 
 }
-
-.evaluation-org-address,
-.organization-org-address { color: blue;}
-.evaluation-org-web { color: green;}
-.evaluation-addl-comments {color: brown;}
 
 .org_type_form_section_header {
 	margin-top: 20px;
@@ -1878,6 +1870,7 @@ margin-bottom: 0;
 }
 /* Form 12 - Organization Selection */
 #input_12_58,
+#input_12_57,
 #input_12_56,
 #input_12_55,
 #input_12_54_chosen,
