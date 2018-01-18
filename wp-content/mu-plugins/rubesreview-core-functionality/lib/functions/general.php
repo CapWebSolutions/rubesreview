@@ -270,8 +270,7 @@ function spoken_extra_sidebars() {
  * Author URI: https://tommcfarlin.com/redirect-non-admin/#code
  */
 function rubesreview_login_redirect( $redirect_to, $request, $user  ) {
-	// return ( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ) ? admin_url() : '/members';
-	// return ( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ) ? admin_url() : bp_core_get_user_domain($user->ID );
+
 	if ( ! is_wp_error( $user ) ) {
 	// do redirects on successful login
 		if ( $user->has_cap( 'administrator' ) ) {

@@ -146,14 +146,17 @@ function rubes_custom_eval_validation($validation_result) {
 
 	$my_post_id_exists = post_exists( $my_post_title );
 
+
 	if ( $my_post_id_exists ) {
+		$my_post_date = get_the_date("m-d-Y", $my_post_id_exists );
+		$my_post_date_next = date( "m-d-Y", strtotime("+6 months" ) );
 		// set the form validation to indicate error
 		$validation_result["is_valid"] = false;
 		$form = $validation_result["form"];
 
 		// specify the first field to be invalid - and provide a custom validation message
 		$form["fields"][0]["failed_validation"] = true;
-		$form["fields"][0]["validation_message"] = "You have already submitted an evaluation for this organization.<br><a href=\"" . get_permalink( $my_post_id_exists ) . "\">View it here.</a>";
+		$form["fields"][0]["validation_message"] = "You submitted an evaluation for this organization on " . $my_post_date . ". <a href=\"" . get_permalink( $my_post_id_exists ) . "\">View it here.</a><br>You may submit another evaluation for this organization on " . $my_post_date_next . ".";
 
 		// update the form in the validation result with the form object you modified
 		$validation_result["form"] = $form;

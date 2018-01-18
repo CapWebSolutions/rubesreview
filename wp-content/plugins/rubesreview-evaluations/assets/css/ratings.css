@@ -14,11 +14,14 @@
 	width: 30%;
 }
 
-.evaluation-image {}
-.evaluation-organization { color:red;}
+/* .evaluation-organization { color:red;}
 .evaluation-org-address { color: blue;}
 .evaluation-org-web { color: green;}
-.evaluation-addl-comments {color: brown;}
+.evaluation-addl-comments {color: brown;} */
+
+.evaluation-org-days {
+	margin-left:100px;
+}
 
 /* Ref: https://css-tricks.com/star-ratings/ */
 .rating {

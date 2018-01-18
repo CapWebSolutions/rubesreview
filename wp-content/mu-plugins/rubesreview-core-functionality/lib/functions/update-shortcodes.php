@@ -28,12 +28,8 @@
 function cws_reviews_shortcode( $atts ) {
 	
 	$a = shortcode_atts( $atts );
-	// $a = shortcode_atts( array(
-	// 		'evaltype' => 'agnt_eval',
-	// 	), $atts );
-	
-		$args = array( 'post_type' => $a['evaltype'] );
-		$the_query = new WP_Query( $args );
-		return $the_query->found_posts;
+	$args = array( 'post_type' => $a['evaltype'] );
+	$the_query = new WP_Query( $args );
+	return $the_query->found_posts;
 }
 add_shortcode( 'rubesreviews', 'cws_reviews_shortcode' );

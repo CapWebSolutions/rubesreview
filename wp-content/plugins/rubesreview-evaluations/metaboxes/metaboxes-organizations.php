@@ -28,20 +28,6 @@ function cws_register_organization_metabox() {
 		'type' => 'text',
 	) );
 
-	// $cmb_organization->add_field( array(
-	// 	'name'             => __( 'Organization Type', 'rubesreview-organizations' ),
-	// 	'desc'			=> 'Select type of organization being added.', 
-	// 	'id'               =>  $prefix . 'org_type',
-	// 	'type'     => 'select',
-	// 	'show_option_none' => true,
-	// 	'options'          => array(
-	// 		'agency' => __( 'Agency', 'rubesreview-organizations' ),
-	// 		'hospital'   => __( 'Hospital', 'rubesreview-organizations' ),
-	// 		'malpractice'     => __( 'Malpractice Company', 'rubesreview-organizations' ),
-	// 		'continuinged'     => __( 'Continuing Education', 'rubesreview-organizations' ),
-	// 	),
-	// ) );
-
 	$cmb_organization->add_field( array(
 		'name' => __( 'Organization Location City', 'rubesreview-organizations' ),
 		'id'   => $prefix . 'organization_city',

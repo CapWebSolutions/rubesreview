@@ -41,6 +41,7 @@ require_once( dirname( __FILE__ ) . '/lib/get-organization-details.php' );
 // Load styles & scripts
 function rubesreview_evaluations_enqueue() {
 	// wp_enqueue_style( 'rubesreview-evaluations', plugins_url( "assets/css/ratings.css", __FILE__ ), array(), '1.0.0.' );
+	wp_enqueue_style( 'rubesreview-evaluations', plugins_url( "assets/css/evaluations.css", __FILE__ ), array(), '1.0.0.' );
 	wp_enqueue_script( 'rubesreview-evaluations', plugins_url( "assets/js/gravity_readonly.js", __FILE__ ), array(), '1.0.0.' );
 }
 
