@@ -142,7 +142,7 @@ function rubes_custom_eval_validation($validation_result) {
 	// $current_user->ID
 	// $current_user->user_email
 	// $current_user->display_name
-	$my_post_title = $_POST['input_55'] . '_' . $current_user->user_login;
+	// $my_post_title = $_POST['input_55'] . '_' . $current_user->user_login;
 
 	$my_post_id_exists = post_exists( $my_post_title );
 
