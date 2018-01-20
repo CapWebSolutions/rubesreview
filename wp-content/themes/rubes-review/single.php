@@ -23,7 +23,9 @@ function rubes_my_custom_class( $attributes ) {
 add_filter( 'genesis_site_layout', '__genesis_return_content_sidebar' );
 
 // Add the BB template header to single post pages
-echo do_shortcode('[fl_builder_insert_layout id="616"]');
-echo do_shortcode('[fl_builder_insert_layout id="1969"]');
+add_action('genesis_after_header', 'add_bb_image');
+function add_bb_image(){
+	echo do_shortcode('[fl_builder_insert_layout id="1969"]');
+}
 
 genesis();
