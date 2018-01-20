@@ -128,7 +128,7 @@ function rubes_custom_validation($validation_result){
 }
 
 /* Check if evaluaiton exists before saving CPT evaluation
-	eval Post name format is {Agency Name:55}_{user:user_login} 
+	eval Post name format is {Org Name}_{LocationCity}_{LocationState}_{user:user_login} 
 */
 
 add_filter('gform_validation_11', 'rubes_custom_eval_validation');  // agency eval form
@@ -137,15 +137,15 @@ add_filter('gform_validation_21', 'rubes_custom_eval_validation');  // continuin
 add_filter('gform_validation_22', 'rubes_custom_eval_validation');  // malpractice company eval form
 
 function rubes_custom_eval_validation($validation_result) {
+
+	$form_id = $validation_result["form"]['id'];
+
 	$current_user = wp_get_current_user();
-	// Other options
-	// $current_user->ID
-	// $current_user->user_email
-	// $current_user->display_name
-	// $my_post_title = $_POST['input_55'] . '_' . $current_user->user_login;
+	$my_post_subtitle = $_POST['input_55'];
+	if ( 22 == $form_id ) $my_post_subtitle = $_POST['input_89'];  // Malp (ID 22) has title in Fld 89
 
+	$my_post_title = $my_post_subtitle . '_' . $current_user->user_login;
 	$my_post_id_exists = post_exists( $my_post_title );
-
 
 	if ( $my_post_id_exists ) {
 		$my_post_date = get_the_date("m-d-Y", $my_post_id_exists );
@@ -193,4 +193,14 @@ function gform_dynamic_post_status($post_data, $form, $entry) {
 
  function display_single_rubes_eval( $args ) {
 
+ }
+
+
+//  add_action( 'gform_pre_submission_11', 'cws_pre_submission' );
+//  add_action( 'gform_pre_submission_20', 'cws_pre_submission' );
+//  add_action( 'gform_pre_submission_21', 'cws_pre_submission' );
+//  add_action( 'gform_pre_submission_22', 'cws_pre_submission' );
+ function cws_pre_submission( $form ){
+	 var_dump( $form );
+	 return;
  }
