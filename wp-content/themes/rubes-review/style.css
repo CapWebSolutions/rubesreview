@@ -1266,13 +1266,13 @@ ul.archives > li {
 }
 
 .header-image .site-title > a {
-	/* background-position: center !important; */
 	background: url(images/rubeslogo.png) no-repeat left;
 	background-size: contain !important;
 	float: left;
 	min-height: 80px;
 	width: 100%;
 }
+
 
 .site-description {
 	font-size: 16px;
@@ -1291,6 +1291,32 @@ ul.archives > li {
 	display: block;
 	/* text-indent: -9999px; */
 }
+
+/* ## 404 Styling
+--------------------------------------------- */
+.rubes-404-page > h1 {
+	padding-top: 20px;
+}
+.rubes-404-page > div > p {
+	padding: 0 30px 100px;
+}
+
+.rubes-404-page > div > p, 
+.rubes-404-page > h1,
+.rubes-404-page > div > h2,
+.rubes-404-page > div > h3 {
+		color: white;
+}
+
+.rubes-404-page {
+	background-image: url(http://rubesreview.local/wp-content/uploads/2017/10/blue-helix.jpg);
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: #013E51;
+}
+/* 	
 
 /* ## Widget Area
 --------------------------------------------- */
@@ -1811,14 +1837,14 @@ body > div.site-container > header > div > div {
 	font-size: 1.6rem; 
 }
 .site-footer .footer-alignleft {
-	float: left;
-	text-align: left;
-	margin-left: 80px;
+	/* float: left; */
+	/* text-align: left; */
+	/* margin-left: 80px; */
 }
 .site-footer .footer-alignright {
-	float: right;
-	text-align: right;
-	margin-right: 80px;
+	/* float: right; */
+	/* text-align: right; */
+	/* margin-right: 80px; */
 }
 
 .site-footer p {
@@ -1990,7 +2016,7 @@ margin-bottom: 0;
 	.site-inner .spotlight-content .content,
 	.site-inner,
 	.wrap {
-		max-width: 960px;
+		/* max-width: 960px; */
 	}
 	
 	.site-inner .spotlight-content {
@@ -2031,7 +2057,7 @@ margin-bottom: 0;
 	.site-inner .spotlight-content,
 	.site-inner,
 	.wrap {
-		max-width: 800px;
+		/* max-width: 800px; */
 	}
 
 	.content,
@@ -2242,8 +2268,8 @@ margin-bottom: 0;
 	}
 
 	.wrap {
-		padding-left: 5%;
-		padding-right: 5%;
+		/* padding-left: 5%; */
+		/* padding-right: 5%; */
 	}
 
 	.after-entry,
@@ -2283,6 +2309,13 @@ margin-bottom: 0;
 	.two-thirds {
 		margin: 0;
 		width: 100%;
+	}
+
+	.rubes-404-page > div > p, 
+	.rubes-404-page > h1,
+	.rubes-404-page > div > h2,
+	.rubes-404-page > div > h3 {
+			color: #013E51;
 	}
 }
 /* Change background image on mobile view*/
@@ -2638,22 +2671,20 @@ div.flexible-widgets.widget-area.spotlight-widget.widget-thirds > div {
 		font-size: 3.5vw;
 	}
 
-	.site-footer .footer-alignleft a,
-	.site-footer .footer-alignright a,
-	body > div.site-container > footer > div > div.footer-alignleft > a:nth-child(1),
-	body > div.site-container > footer > div > div.footer-alignleft > a:nth-child(4) {
+	.site-footer .footer-alignright,
+	.site-footer .footer-alignleft {
 		width: 100%;
 		margin: 0 auto;
+		float: none;
+		text-align: inherit;
+		padding: 0;
 	}
+
 }
-
-
-
-
-/* This for split header test */
-.header-image .site-title > a {
-    min-height: 97x;
-}
+	/* split header saettings */
+	.header-image .site-title > a {
+		min-height: 97x;
+	}
 
 @media only screen and (min-width: 1024px) {
 
