@@ -16,6 +16,12 @@ include_once( get_template_directory() . '/lib/init.php' );
 // Setup Theme.
 include_once( get_stylesheet_directory() . '/lib/theme-defaults.php' );
 
+//* Start the Child Theme engine
+require_once( 'lib/init.php' );
+
+// //* Initialize the Child Theme
+rubesreview_init();
+
 // Set Localization (do not remove).
 add_action( 'after_setup_theme', 'rubes_review_localization_setup' );
 function rubes_review_localization_setup(){

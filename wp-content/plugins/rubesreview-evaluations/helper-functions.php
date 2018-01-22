@@ -148,15 +148,24 @@ function rubes_custom_eval_validation($validation_result) {
 	$my_post_id_exists = post_exists( $my_post_title );
 
 	if ( $my_post_id_exists ) {
-		$my_post_date = get_the_date("m-d-Y", $my_post_id_exists );
-		$my_post_date_next = date( "m-d-Y", strtotime("+6 months" ) );
+
+		// Can only submit reviews every 6 months, or as defined on theme options page.
+		$resubmit_interval = '+6 months';
+		$resubmit_option = genesis_get_option( 'rr_resubmit_eval', 'rubesreview-settings' );
+		if ( '1' <= $resubmit_option && '6' >= $resubmit_option ) $resubmit_interval = '+' . $resubmit_option . ' months';
+
+		$my_post_date = get_the_date("Y-m-d", $my_post_id_exists );
+		$my_date = new DateTime($my_post_date);
+		$my_date->add(new DateInterval('P' . $resubmit_option . 'M'));
+		$my_post_date_next = $my_date->format("m-d-Y");
+		
 		// set the form validation to indicate error
 		$validation_result["is_valid"] = false;
 		$form = $validation_result["form"];
 
 		// specify the first field to be invalid - and provide a custom validation message
 		$form["fields"][0]["failed_validation"] = true;
-		$form["fields"][0]["validation_message"] = "You submitted an evaluation for this organization on " . $my_post_date . ". <a href=\"" . get_permalink( $my_post_id_exists ) . "\">View it here.</a><br>You may submit another evaluation for this organization on " . $my_post_date_next . ".";
+		$form["fields"][0]["validation_message"] = "You have already submitted an evaluation for this organization. <a href=\"" . get_permalink( $my_post_id_exists ) . "\">View it here.</a><br>You may submit another evaluation for this organization on " . $my_post_date_next . ".";
 
 		// update the form in the validation result with the form object you modified
 		$validation_result["form"] = $form;
