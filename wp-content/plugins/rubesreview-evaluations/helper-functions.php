@@ -36,9 +36,14 @@ function load_archive_template( $archive_template ) {
 	if ( is_post_type_archive( array('hosp_eval' ) ) ) {
 		$archive_template = dirname( __FILE__ ) . '/views/single-evaluation-hospital.php';
 	}
-	if ( is_post_type_archive( array('cont_eval', 'malp_eval' ) ) ) {
-		$archive_template = dirname( __FILE__ ) . '/views/archive-evaluation.php';
+	if ( is_post_type_archive( array('cont_eval' ) ) ) {
+		$archive_template = dirname( __FILE__ ) . '/views/single-evaluation-continuinged.php';
 	}
+	
+	if ( is_post_type_archive( array('malp_eval' ) ) ) {
+		$archive_template = dirname( __FILE__ ) . '/views/single-evaluation-malpractice.php';
+	}
+
 	if ( is_post_type_archive( 'organization' ) ) {
 		$archive_template = dirname( __FILE__ ) . '/views/archive-organization.php';
 	}
