@@ -21,16 +21,19 @@ remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 //* Remove entry title
 remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 
+add_action('genesis_after_header', 'rubes_dump_out_bb_malp_header');
+function rubes_dump_out_bb_malp_header() {
+	//* Dump out Beaver Builder Header
+	FLBuilder::render_query( array(
+		'post_type' => 'fl-builder-template',
+		'p'         => 956 // Beaver Header Template ID
+	) );
+}
 
 add_action( 'genesis_entry_header', 'rubesreview_malp_evaluation_info', 10 );
 function rubesreview_malp_evaluation_info() {
 
 	global $post;
-//* Dump out Beaver Builder Header
-	FLBuilder::render_query( array(
-		'post_type' => 'fl-builder-template',
-		'p'         => 956 // Breaver Header Template ID
-	) );
 
 	$post_id = get_the_ID();
 	display_single_rubes_malp_eval( $post_id );

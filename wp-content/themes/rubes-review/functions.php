@@ -164,6 +164,9 @@ add_action( 'genesis_after_page-widget_widget_area', 'genesis_do_nav', 12 );
 // Add typical attributes for footer navigation elements.
 add_filter( 'genesis_attr_nav-footer', 'genesis_attributes_nav' );
 
+// Remove CPT Archive desxcription
+remove_action( 'genesis_before_loop', 'genesis_do_cpt_archive_title_description' );
+
 // Display Footer Navigation Menu above footer content
 add_action( 'genesis_footer', 'genesis_sample_do_footernav', 5 );
 /**
