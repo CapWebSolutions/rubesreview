@@ -35,7 +35,8 @@ function cap_web_footer_creds_filter( $creds ) {
 	$creds .= '<a href="/privacy-policy/">Privacy Policy</a> &middot; <a href="/terms-conditions">Terms & Conditions</a><br/>';
 	$creds .= 'Copyright [footer_copyright] [sitename] &middot; All Rights Reserved.';
 	$creds .= '</div><div class="footer-alignright">';
-	$creds .= '[footer_custombacktotop]<br/>';
-	$creds .= "Website by <a {$rel} href=\"https://capwebsolutions.com/\" target=\"_blank\" >Cap Web Solutions</a></div>";
+	$creds .= "Website by <a {$rel} href=\"https://capwebsolutions.com/\" rel=\"nofollow\" target=\"_blank\" >Cap Web Solutions</a><br>";
+	$creds .= '[footer_custombacktotop]';
+	$creds .= '</div>';
 	return $creds;
 }
