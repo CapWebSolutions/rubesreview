@@ -107,8 +107,6 @@ Thumbs.db
 !safari-pinned-tab.svg
 
 # track these mu-plugins, plugins, and themes
-# add your own entries here
 !wp-content/themes/rubes-review/
-!wp-content/mu-plugins/rubesreview-core-functionality/
-!wp-content/mu-plugins/load.php
+!wp-content/plugins/rubesreview-core-functionality/
 !wp-content/plugins/rubesreview-evaluations/
