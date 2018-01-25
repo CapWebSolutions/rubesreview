@@ -20,15 +20,10 @@ function rubesreview_add_body_class( $classes ) {
 	return $classes;
 }
 
-// Force Content/Sidebar layout.
-// add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_content_sidebar' );
-
 /**
  * Remove the standard loop
  */
 remove_action( 'genesis_loop', 'genesis_do_loop' );
-
-// add_shortcode( 'output_page_ratings', __NAMESPACE__ . '\rubes_ratings_loop' );
 
 //* Custom Loop
 add_action( 'genesis_loop',  __NAMESPACE__ . '\rubes_ratings_loop' );
@@ -39,18 +34,19 @@ function rubes_ratings_loop() {
 //* dump out the Beaver header & menu template  
 	FLBuilder::render_query( array(
 		'post_type' => 'fl-builder-template',
-		// 'p'         => 1226 // Beaver Template ID
-		'p'         => 622 // Beaver Template ID
+		'p'         => 622 // Beaver Ratings Template ID
+
 	) );
 
-	printf('<div class="ratings-content-wrapper">');
+	printf('<div class="ratings-wrapper"><div class="ratings-content-wrapper">');
+
 	$rating_displays = array( 'Most Recent Ratings', 'Ratings Leaderboard' );
 	foreach ( $rating_displays as $rating_display_value ) {
 
 	printf('<div class="ratings-section-wrapper">');
 
 	printf('<div class="ratings-section-heading">%s</div>', $rating_display_value );
-	printf('<div class="ratings-wrapper">');
+	printf('<div class="ratings-grid-wrapper">');
 	$orgtypes = array( 
 		array('slug' => 'agency', 
 			'pref' => 'agnt_', 
@@ -80,7 +76,7 @@ function rubes_ratings_loop() {
 				);
 
 				print_average_ratings_line( $query_args, $orgvalue, $prefix );
-				// wp_reset_postdata();
+
 			} /* End of $orgtypes loop */
 
 			/* *********************************************************************** */
@@ -100,10 +96,19 @@ function rubes_ratings_loop() {
 			} /* End of $orgtypes loop */		
 			break; /* End of Ratings Leaderboard case */
 	} /* end of switch */
-	printf('</div></div>'); /* End of rating-section-wrapper and ratings-wrapper divs */
+	printf('</div></div>'); /* End of rating-section-wrapper and ratings-grid-wrapper divs */
 
 	} /* end of $rating_displays loop */
-	printf('</div>'); /* End of rating-content-wrapper div */
+	printf('</div>'); /* close ratings-content-wrapper */
+
+	// Output sidebar on ratings page. doing it here since entire page is begin generated in code. 
+	// Change sidebar configuration under Appearence | Widgets screen
+	printf('<div class=ratings-sidebar-wrapper">'); 
+		get_sidebar('logged-in-sidebar');
+	printf('</div>'); /* close ratings-sidebar-wrapper */
+
+	printf('</div>'); /* End of ratings-wrapper */
+
 }
 //* Restore original query
 wp_reset_query();
