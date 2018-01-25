@@ -103,7 +103,7 @@ function rubes_ratings_loop() {
 
 	// Output sidebar on ratings page. doing it here since entire page is begin generated in code. 
 	// Change sidebar configuration under Appearence | Widgets screen
-	printf('<div class=ratings-sidebar-wrapper">'); 
+	printf('<div class="ratings-sidebar-wrapper">'); 
 		get_sidebar('logged-in-sidebar');
 	printf('</div>'); /* close ratings-sidebar-wrapper */
 

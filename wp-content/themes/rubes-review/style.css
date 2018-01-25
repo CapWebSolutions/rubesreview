@@ -943,7 +943,7 @@ img.alignright,
 ---------------------------------------------------------------------------------------------------- */
 
 .widget {
-	margin-bottom: 40px;
+	/* margin-bottom: 40px; */
 	word-wrap: break-word;
 }
 
@@ -2546,7 +2546,7 @@ a.ratings-archive-link {
 		float: left;
   }
   .ratings-sidebar-wrapper {
-	  background-color: cyan;
+	  /* background-color: cyan; */
 		width: 33.33%;
 		float: left;
   }
@@ -2555,7 +2555,16 @@ a.ratings-archive-link {
 		display: table;
 		clear: both;
   }
-  
+/* These next three rules style ratings page sidebar simialr to non-BB page sidebars.   */
+.ratings-page .sidebar .widget {
+    padding: 10px;
+}
+.ratings-page .widget {
+	margin-bottom: 0;
+}
+.ratings-page h3.widgettitle.widget-title {
+	font-size: 30px;
+}
 
 @media only screen and (max-width: 800px) {
 	.ratings-grid-wrapper {
