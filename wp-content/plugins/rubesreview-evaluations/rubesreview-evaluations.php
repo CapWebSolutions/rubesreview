@@ -43,7 +43,8 @@ require_once(__DIR__ . '/cmb2/init.php');
  * Load in specific metaboxes for organization types and evaluations
  */
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-organizations.php' );
-require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-agency.php' );
+// require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-agency.php' );
+require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-agency-v2.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-hospital.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-continuing-education.php' );
 require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-malpractice-co.php' );
@@ -51,7 +52,8 @@ require_once( dirname( __FILE__ ) . '/metaboxes/metaboxes-malpractice-co.php' );
 /**
  * Load in organization specific handlers
  */
-require_once( dirname( __FILE__ ) . '/lib/display-agency.php' );
+// require_once( dirname( __FILE__ ) . '/lib/display-agency.php' );
+require_once( dirname( __FILE__ ) . '/lib/display-agency-v2.php' );
 require_once( dirname( __FILE__ ) . '/lib/display-hospital.php' );
 require_once( dirname( __FILE__ ) . '/lib/display-continuing-education.php' );
 require_once( dirname( __FILE__ ) . '/lib/display-malpractice-co.php' );
@@ -86,20 +88,21 @@ function dump_out_rubes_footer() {
 	//* dump out the BB footer. 
 	FLBuilder::render_query( array(
 		'post_type' => 'fl-builder-template',
-		'p'         => 619 // Breaver Footer Template ID
+		'p'         => 619 // Beaver Footer Template ID
 	) );
 }
 
 // Target submissions from various forms.
 // All Eval forms are creating CPT of the evals so the entry is not needed after CPT is published. 
 // Change gform_after_submission_1 to reflect your target form ID.
-add_action( 'gform_after_submission_4', 'remove_form_entry' );
-add_action( 'gform_after_submission_10', 'remove_form_entry' );  // Add Organization -> CPT
-add_action( 'gform_after_submission_11', 'remove_form_entry' );  // Agency eval -> CPT
+add_action( 'gform_after_submission_4', 'remove_form_entry' );  // State Contact Info
+// add_action( 'gform_after_submission_10', 'remove_form_entry' );  // Add Organization -> CPT
+// add_action( 'gform_after_submission_11', 'remove_form_entry' );  // Agency eval -> CPT
 add_action( 'gform_after_submission_12', 'remove_form_entry' );  // Select Organization
-add_action( 'gform_after_submission_20', 'remove_form_entry' );  // Hospital Evaluation -> CPT
-add_action( 'gform_after_submission_21', 'remove_form_entry' );  // CE Eval -> CPT
-add_action( 'gform_after_submission_22', 'remove_form_entry' );  // Malpractice Eval -> CPT
+// add_action( 'gform_after_submission_20', 'remove_form_entry' );  // Hospital Evaluation -> CPT
+// add_action( 'gform_after_submission_21', 'remove_form_entry' );  // CE Eval -> CPT
+// add_action( 'gform_after_submission_22', 'remove_form_entry' );  // Malpractice Eval -> CPT
+// add_action( 'gform_after_submission_23', 'remove_form_entry' );  // Agency v2 Eval -> CPT
 function remove_form_entry( $entry ) {
     GFAPI::delete_entry( $entry['id'] );
 }
