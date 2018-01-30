@@ -308,7 +308,7 @@ function be_remove_genesis_page_templates( $page_templates ) {
 	// unset( $page_templates['page_blog.php'] );
 	return $page_templates;
 }
-add_filter( 'theme_page_templates', 'be_remove_genesis_page_templates' );
+// add_filter( 'theme_page_templates', 'be_remove_genesis_page_templates' );
 
 // Customize entry meta header
 // ref: https://wpbeaches.com/change-genesis-post-entry-footer-meta-output/
