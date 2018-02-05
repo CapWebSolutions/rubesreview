@@ -1,0 +1,9 @@
+@media all and ( min-width: 800px ) { 
+	/* Turn off second level menu display on large devices since other menu is displayed */
+	.noshow-on-full {
+		display: none;
+	}
+	#genesis-content > article > div > div > div.fl-row.fl-row-fixed-width.fl-row-bg-none.fl-node-5a1399d8a454e > div > div > div > div.fl-col.fl-node-5a1399d8a9e3b.fl-col-small > div {
+		text-align: center;
+	}
+}

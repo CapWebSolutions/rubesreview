@@ -1,0 +1,8 @@
+span.evaluation-org-days:after {
+	/* margin-left: 200px; */
+	text-align: right;
+}
+
+.evaluation-addl-comments {
+	margin-bottom: 10px;
+}
