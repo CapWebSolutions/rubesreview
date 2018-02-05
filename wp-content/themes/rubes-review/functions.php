@@ -49,7 +49,7 @@ include_once( get_stylesheet_directory() . '/lib/woocommerce/woocommerce-notice.
 // Child theme (do not remove).
 define( 'CHILD_THEME_NAME', 'Rubes Review' );
 define( 'CHILD_THEME_URL', 'https://capwebsolutions.com/' );
-define( 'CHILD_THEME_VERSION', '1.6.2' );
+define( 'CHILD_THEME_VERSION', '1.7.1' );
 
 // Enqueue Scripts and Styles.
 add_action( 'wp_enqueue_scripts', 'rubes_review_enqueue_scripts_styles' );
@@ -102,19 +102,10 @@ add_theme_support( 'genesis-accessibility', array( '404-page', 'drop-down-menu',
 // Add viewport meta tag for mobile browsers.
 add_theme_support( 'genesis-responsive-viewport' );
 
-// Add support for custom header.
-// add_theme_support( 'custom-header', array(
-// 	'width'           => 714,
-// 	'height'          => 384,
-// 	'header-selector' => '.site-title a',
-// 	'header-text'     => false,
-// 	'flex-height'     => true,
-// ) );
-
 // Try split header with center logo
 add_theme_support( 'custom-header', array(
-	'width'           => 600,
-	'height'          => 197,
+	'width'           => 300,  /*600*/
+	'height'          => 97,  /*197*/
 	'header-selector' => '.site-title a',
 	'header-text'     => false,
 	'flex-height'     => true,
@@ -148,18 +139,10 @@ add_theme_support( 'genesis-menus', array(
 	'footer'    => __( 'Footer Navigation Menu', 'rubes-review' ),
 ) );
 
-// Rename primary and secondary navigation menus.
-// add_theme_support( 'genesis-menus', array( 
-// 	'primary' => __( 'After Header Menu', 'rubes-review' ), 
-// 	'secondary' => __( 'Footer Menu', 'rubes-review' ) ) );
 
 // Reposition the primary navigation menu.
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
 add_action( 'genesis_after_page-widget_widget_area', 'genesis_do_nav', 12 );
-
-// Reposition sub nav
-// remove_action('genesis_after_header', );
-// add_action('genesis_footer', );
 
 // Add typical attributes for footer navigation elements.
 add_filter( 'genesis_attr_nav-footer', 'genesis_attributes_nav' );
@@ -193,7 +176,6 @@ function genesis_sample_do_footernav() {
 	) );
 
 }
-
 
 // Show primary nav on all pages except front page
 add_action('get_header', 'child_add_nav_to_interior_pages');
@@ -336,7 +318,13 @@ function rubes_public_archive_description() {
 }
 add_shortcode('show_public_description', 'rubes_public_archive_description');
 
-
+function force_spotlights_to_have_sidebar() {
+// Force Content/Sidebar layout on single blog posts.
+	if ( is_singular( 'post' ) ) {
+		add_filter( 'genesis_site_layout', '__genesis_return_content_sidebar' );
+	}
+}
+// add_action('genesis_entry_header', 'force_spotlights_to_have_sidebar' );
 
 /**
  * Redirect non-admins to the homepage after logging into the site.
@@ -419,24 +407,25 @@ function be_dps_move_image_after_title( $output, $original_atts, $image, $title,
   }
 add_filter( 'display_posts_shortcode_output', 'be_dps_move_image_after_title', 10, 9 );
 
-// This for split header test
-// if header image is set, remove Header Right widget area and inject CSS to apply the header image as background image for home menu item and more
+// This for split header
+// Ref: https://sridharkatakam.com/split-navigation-menu-items-logos-left-right-genesis/
+// If header image is set, remove Header Right widget area
+//   inject CSS to apply the header image as background image for home menu item and more
 add_action( 'wp_head', 'sk_home_menu_item_background_image' );
 function sk_home_menu_item_background_image() {
 
     if ( get_header_image() ) {
         // Remove the header right widget area
-        unregister_sidebar( 'header-right' ); ?>
-
-        <style type="text/css">
+		unregister_sidebar( 'header-right' ); ?>
+		<style type="text/css">
             .nav-primary li.menu-item-home a {
-                background-image: url(<?php echo get_header_image(); ?>);
+				background-image: url(<?php echo get_header_image(); ?>);
                 text-indent: -9999em;
                 width: 300px;
-                height: 97px;
+                height: 96px;
             }
 
-            @media only screen and (min-width: 1024px) {
+            @media only screen and (min-width: 1200px) {
                 .site-header > .wrap {
                     padding: 0;
                 }
