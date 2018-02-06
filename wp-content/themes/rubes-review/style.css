@@ -2163,14 +2163,14 @@ a.ratings-archive-link {
 	}
 
   .ratings-wrapper {
-	  /* background-color: green; */
+	  background-color: green;
 	  width: 100%;
-  }
+	 }
   .ratings-content-wrapper {
 		  /* background-color: orange; */
-		width: 66.66%;
-		float: left;
-  }
+		  width: 66.66%;
+		  float: left;
+		}
   .ratings-sidebar-wrapper {
 	  /* background-color: cyan; */
 		width: 33.33%;
@@ -2522,7 +2522,14 @@ div.flexible-widgets.widget-area.spotlight-widget.widget-thirds > div {
         background-repeat: no-repeat;
         background-size: contain;
         margin: 0 10px;
-    }
+	}
+	/* Tweak the single evaluation view on mobile */
+	.evaluation-org-stars-wrap {
+		width: 100%;
+	}
+	.evaluation-wrap {
+		margin: 50px 0 50px 0;
+	}
 }
 
 /* split header settings */
