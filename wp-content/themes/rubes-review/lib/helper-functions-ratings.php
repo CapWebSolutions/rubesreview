@@ -16,7 +16,6 @@ function print_average_ratings_line( $args, $orgvalue, $prefix ) {
     $wp_query = new WP_Query( $args );
 
     // What type of organization are we processing 
-    // $org_name_title = ucwords( $args['tax_query'][0]['terms'] );
 	$org_name_title = ucwords( $orgvalue['evaltype'] );
 	
     printf('<div class="ratings-heading-grouping">');
@@ -47,7 +46,7 @@ function print_average_ratings_line( $args, $orgvalue, $prefix ) {
             $eval_org_name_email = $my_eval_values[3];  // author_email
             $eval_org_name_location = $eval_org_name_city . ', ' . $eval_org_name_state;
 
-            $rating_content = sprintf('<div class="evaluation-org-stars-%s"><a href="%s">%s &mdash; %s</a></div>', $rating_average, get_permalink( $post_id ), $eval_org_name_front, $eval_org_name_location  );
+            $rating_content = sprintf('<div class="evaluation-org-stars-%s"><a href="%s">%s<br> &mdash; %s</a></div>', $rating_average, get_permalink( $post_id ), $eval_org_name_front, $eval_org_name_location  );
 			printf( '<div class="ratings-line">%s</div>', $rating_content  );
         }
         if ( $wp_query->found_posts > 1 ) printf('<a class="ratings-archive-link" href="' . '/%s' . '">All %s Evaluations</a>', $my_term_slug, ucwords($my_term) );
