@@ -51,6 +51,19 @@ define( 'CHILD_THEME_NAME', 'Rubes Review' );
 define( 'CHILD_THEME_URL', 'https://capwebsolutions.com/' );
 define( 'CHILD_THEME_VERSION', '1.7.1' );
 
+remove_action( 'genesis_meta', 'genesis_load_stylesheet' );
+add_action( 'genesis_meta', 'cws_load_stylesheet' );
+/**
+ * Loads versioned stylesheet.
+ *
+ * @author Matt Ryan
+ * @since 1.0.0
+ */
+function cws_load_stylesheet() {
+	wp_enqueue_style('rubes-review', get_bloginfo('stylesheet_url'), array(), filemtime( get_stylesheet_directory() . '/style.css'), 'screen' );
+}
+
+
 // Enqueue Scripts and Styles.
 add_action( 'wp_enqueue_scripts', 'rubes_review_enqueue_scripts_styles' );
 function rubes_review_enqueue_scripts_styles() {
@@ -67,6 +80,8 @@ function rubes_review_enqueue_scripts_styles() {
 	);
 
 }
+
+
 
 // Pull in all supporting functions.
 include_once( get_stylesheet_directory() . '/lib/helper-functions-gravityforms.php' );
@@ -318,13 +333,6 @@ function rubes_public_archive_description() {
 }
 add_shortcode('show_public_description', 'rubes_public_archive_description');
 
-function force_spotlights_to_have_sidebar() {
-// Force Content/Sidebar layout on single blog posts.
-	if ( is_singular( 'post' ) ) {
-		add_filter( 'genesis_site_layout', '__genesis_return_content_sidebar' );
-	}
-}
-// add_action('genesis_entry_header', 'force_spotlights_to_have_sidebar' );
 
 /**
  * Redirect non-admins to the homepage after logging into the site.
