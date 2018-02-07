@@ -90,22 +90,8 @@ class rubesreview_settings extends Genesis_Admin_Boxes {
 	 * @since 1.0.0
 	 */
 	function metaboxes() {
-		// add_meta_box('sr_scripture_text_metabox', 'Scripture Text', array($this, 'sr_scripture_text_metabox' ), $this->pagehook, 'main', 'high');
-		// add_meta_box('sr_poet_diary_bg_image_metabox', 'Poet Diary Background Image', array( $this, 'sr_poet_diary_bg_image_metabox' ), $this->pagehook, 'main', 'high');
-		// add_meta_box('sr_my_works_len_metabox', '"My Works" Minimum Lengths', array( $this, 'sr_my_works_len_metabox' ), $this->pagehook, 'main', 'high');
-		// add_meta_box('sr_submit_details', 'POTM Submission Defaults', array( $this, 'sr_submit_details_metabox' ), $this->pagehook, 'main', 'default');
-		// add_meta_box('sr_potm_details', 'POTM Selection', array( $this, 'sr_potm_selection_metabox' ), $this->pagehook, 'main', 'default');
 		add_meta_box('rr_resubmit_eval_metabox', 'Resubmit Interval', array( $this, 'rr_resubmit_eval_metabox' ), $this->pagehook, 'main', 'default');
 	}
-
-	/**
-	 * Scripture Text Metabox
-	 * @since 1.0.0
-	 */
-	// function rr_scripture_text_metabox() {
-	
-	// 	echo '<p><input type="text" name="' . $this->get_field_name( 'rr_scripture_text' ) . '" id="' . $this->get_field_id( 'rr_scripture_text' ) . '" value="' . esc_attr( $this->get_field_value( 'rr_scripture_text' ) ) . '" size="150" /></p>';
-	// }
 
 	/**
 	 * Resubmit Eval Period Settings Metabox
@@ -115,32 +101,7 @@ class rubesreview_settings extends Genesis_Admin_Boxes {
 		echo '<p><strong>Eval Resubmit Interval</strong> (Default is 6 months)</p>';
 		echo '<p><input type="number" min="1" name="' . $this->get_field_name( 'rr_resubmit_eval' ) . '" id="' . $this->get_field_id( 'rr_resubmit_eval' ) . '" value="' . esc_attr( $this->get_field_value( 'rr_resubmit_eval' ) ) . '" size="2" /></p>';
 	}
-	/*
-	 * Submit Details Metabox
-	 * @since 1.0.0
-	 */
-	// function rr_submit_details_metabox() {
-	// 	echo '<p><strong>Start Day of Month ( 1 - 27 )</p>';
-	// 	echo '<p><input type="number" value="23" min="1" max="27" name="' . $this->get_field_name( 'rr_submit_start_day_of_month' ) . '" id="' . $this->get_field_id( 'rr_submit_start_day_of_month' ) . '" value="' . esc_attr( $this->get_field_value( 'rr_submit_start_day_of_month' ) ) . '" size="2" /></p>';
-	// 	echo '<p><strong>Start Hour ( 0 - 23 )</p>';
-	// 	echo '<p><input type="number" value="0" min="0" max="23" name="'  . $this->get_field_name( 'rr_submit_start_time_of_day' ) . '" id="' . $this->get_field_id( 'rr_submit_start_time_of_day' ) . '" value="' . esc_attr( $this->get_field_value( 'rr_submit_start_time_of_day' ) ) . '" size="2" /></p>';
-	// 	echo '<p><strong>Duration in minutes ( 1-59 )</p>';
-	// 	echo '<p><input type="number" value="30" min="1" max="59" name="' . $this->get_field_name( 'rr_submit_duration' ) . '" id="' . $this->get_field_id( 'rr_submit_duration' ) . '" value="' . esc_attr( $this->get_field_value( 'rr_submit_duration' ) ) . '" size="2" /></p>';
-	// }	
-	/*
-	 * POTM Selection Metabox
-	 * @since 1.0.0
-	 */
-	// function rr_potm_selection_metabox() {
-	// 	echo '<p><strong>Video URL from media library.</p>';
-	// 	echo '<p><input type="video" name="' . $this->get_field_name( '_potm_video_url' ) . '" id="' . $this->get_field_id( '_potm_video_url' ) . '" value="' . esc_attr( $this->get_field_value( '_potm_video_url' ) ) . '" size="150" /></p>';
-	// 	echo '<p><strong>Video Cover Poster from media library.</p>';
-	// 	echo '<p><input type="url" name="' . $this->get_field_name( '_potm_video_poster' ) . '" id="' . $this->get_field_id( '_potm_video_poster' ) . '" value="' . esc_attr( $this->get_field_value( '_potm_video_poster' ) ) . '" size="150" /></p>';
-	// 	echo '<p><strong>Poet name</p>';
-	// 	echo '<p><input type="text" name="'  . $this->get_field_name( '_potm_name' ) . '" id="' . $this->get_field_id( '_potm_name' ) . '" value="' . esc_attr( $this->get_field_value( '_potm_name' ) ) . '" size="50" /></p>';
-	// 	echo '<p><strong>Poet location</p>';
-	// 	echo '<p><input type="text" name="' . $this->get_field_name( '_potm_location' ) . '" id="' . $this->get_field_id( '_potm_location' ) . '" value="' . esc_attr( $this->get_field_value( '_potm_location' ) ) . '" size="50" /></p>';
-	// }
+
 }
 
 /**

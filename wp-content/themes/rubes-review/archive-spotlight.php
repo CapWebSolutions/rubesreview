@@ -35,11 +35,10 @@ function custom_do_grid_loop() {
 	if( $loop->have_posts() ):
 				
 		while( $loop->have_posts() ): $loop->the_post(); global $post;
-$id = $post->id;
+			$id = $post->id;
 		echo '<div id="spotlights">';
 			echo '<div class="one-fourth first">';
 			echo '<div class="spotlight-image"><div class="pic">'. get_the_post_thumbnail( $id, array(150,150) ).'</div></div>';
-			// echo '<div style="margin-top:20px;line-height:20px;text-align:right;"><cite>'.genesis_get_custom_field( '_cd_client_name' ).'</cite><br />'.genesis_get_custom_field( '_cd_client_title' ).'</div>';
 			echo '</div>';	
 			echo '<div class="three-fourths" style="border-bottom:1px solid #DDD;">';
 			echo '<h3>' . get_the_title() . '</h3>';
@@ -52,7 +51,6 @@ $id = $post->id;
 	endif;
 	
 	// Outro Text (hard coded)
-	echo '<div class="call-to-action">Want me to make your next web project easier? <a href="http://www.carriedils.com/contact">Let\'s Talk</a></div>';
 	echo '</div><!-- end .entry-content -->';
 	echo '</div><!-- end .page .hentry .entry -->';
 }
