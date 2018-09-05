@@ -106,7 +106,7 @@ function load_single_template( $single_template ) {
 	Post name format is {Organization Name:32}_{Location:33}_{Location:34} 
 */
 
-add_filter('gform_validation_10', 'rubes_custom_validation');
+add_filter( 'gform_validation_10', 'rubes_custom_validation' );
 function rubes_custom_validation($validation_result){
 
 	if ( is_null( $_POST['input_32'] ) || empty( $_POST['input_32'] )) {
@@ -115,6 +115,11 @@ function rubes_custom_validation($validation_result){
 		$form["fields"][0]["failed_validation"] = true;
 		$form["fields"][0]["validation_message"] = "This field is required.";
 	} else {
+		// Since working in the front end here, need to pull in the post_exists function specifically.
+		if ( ! function_exists( 'post_exists' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/post.php' );
+		}
+
 		$post_title_to_add = $_POST['input_32'] . '_' . $_POST['input_33'] . '_' . $_POST['input_34'];
 		$my_post_id_exists = post_exists( $post_title_to_add );
 		if ( $my_post_id_exists ) {
@@ -152,6 +157,11 @@ function rubes_custom_eval_validation($validation_result) {
 	$my_post_subtitle = $_POST['input_55'];
 	if ( 22 == $form_id ) $my_post_subtitle = $_POST['input_89'];  // Malp (ID 22) has title in Fld 89
 	if ( 23 == $form_id ) $my_post_subtitle = $_POST['input_1'];  // Agency v2 (ID 23) has title in Fld 1
+
+	// Since working in the front end here, need to pull in the post_exists function specifically.
+	if ( ! function_exists( 'post_exists' ) ) {
+		require_once( ABSPATH . 'wp-admin/includes/post.php' );
+	}
 
 	$my_post_title = $my_post_subtitle . '_' . $current_user->user_login;
 	$my_post_id_exists = post_exists( $my_post_title );
