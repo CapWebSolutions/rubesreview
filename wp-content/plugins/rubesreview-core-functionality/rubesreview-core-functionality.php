@@ -20,7 +20,7 @@
  // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-// Plugin Directory. Set constant so we know where we are installed
+// Plugin Directory. Set constant so we know where we are installed.
 $plugin_url = plugin_dir_url( __FILE__ );
 if ( is_ssl() ) {
 	$plugin_url = str_replace( 'http://', 'https://', $plugin_url );
@@ -28,18 +28,20 @@ if ( is_ssl() ) {
 define( 'CORE_FUNCTION_URL', $plugin_url );
 define( 'CORE_FUNCTION_DIR', plugin_dir_path( __FILE__ ) );
 
-// General. This should always be used. 
+// General. This should always be used.
 include_once( CORE_FUNCTION_DIR . '/lib/functions/general.php' );
 
-// Shortcode Updater. 
+// Define CPTs and associated taxonomies.
+// include_once( CORE_FUNCTION_DIR . '/lib/functions/post-types.php' );
+// include_once( CORE_FUNCTION_DIR . '/lib/functions/taxonomies.php' );
+
+// Shortcode Updater.
 include_once( CORE_FUNCTION_DIR . '/lib/functions/update-shortcodes.php' );
 
-// Footer Setup.This should always be used. 
+// Footer Setup.This should always be used.
 include_once( CORE_FUNCTION_DIR . '/lib/functions/core-footer.php' );
 
 // Gravity Forms tweaks. This should always be used if Gravity Forms active.
 if ( in_array( 'gravityforms/gravityforms.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	include_once( CORE_FUNCTION_DIR . '/lib/functions/gravitytweaks.php' );
 }
-
- 
