@@ -22,13 +22,17 @@
  */
 
 /* For rubesreviews shortcode, return number of posts in the specified category.
- * Use this in numbeer counter for front page. 
+ * Use this in number counter for front page. 
  */
 
 function cws_reviews_shortcode( $atts ) {
 	
-	$a = shortcode_atts( $atts );
-	$args = array( 'post_type' => $a['evaltype'] );
+	$args = shortcode_atts(
+		array(
+			'post_type' => 'evaltype',
+		), $atts
+	);
+	// $args = array( 'post_type' => $a['evaltype'] );
 	$the_query = new WP_Query( $args );
 	return $the_query->found_posts;
 }
