@@ -151,9 +151,11 @@ function rubes_enqueue_needed_scripts() {
 // Add custom logo to login page
 // Requires a transparent logo file in the active theme's images folder named 'login_logo.png'
 add_action( 'login_head', 'custom_loginlogo' );
-function custom_loginlogo() {
+function custom_loginlogo() { 
 echo '<style type="text/css">
-h1 a {background-image: url(' . get_bloginfo( 'stylesheet_directory' ) . '/images/login_logo.png) !important; }
+body {background-image: url(' . get_bloginfo( 'stylesheet_directory' ) . '/images/blue-helix-1.jpg) !important;background-size: cover !important;height: auto !important; width: auto !important;background-position: center!important;z-index: -99;}
+h1 a {background-image: url(' . get_bloginfo( 'stylesheet_directory' ) . '/images/login_logo.png) !important; } 
+.login #backtoblog a, .login #nav a { color: white !important;}
 </style>';
 }
 
@@ -193,12 +195,12 @@ function remove_widget_title( $widget_title ) {
 
 
 /**
- * Remove title from individual pages. 
+ * Remove title from individual pages.
  */
 add_action( 'get_header', 'remove_titles_from_pages' );
 function remove_titles_from_pages() {
-	// Add list of page slugs in array
-    if ( is_page(array('home') ) ) {
+	// Add list of page slugs in array.
+	if ( is_page( array( 'home' ) ) ) {
         remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
     }
 }
@@ -209,7 +211,7 @@ add_theme_support( 'genesis-footer-widgets', 3 );
 /** Add support for custom background */
 add_theme_support( 'custom-background' );
 
-//* Add the front page widgets
+// Add the front page widgets.
 // add_action( 'genesis_header', 'CORE_FUNCTION_home_featured', 20 );
 function CORE_FUNCTION_home_featured() {
 
