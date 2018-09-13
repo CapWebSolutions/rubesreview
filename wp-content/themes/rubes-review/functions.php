@@ -26,6 +26,7 @@ rubesreview_init();
 add_action( 'after_setup_theme', 'rubes_review_localization_setup' );
 function rubes_review_localization_setup(){
 	load_child_theme_textdomain( 'rubes-review', get_stylesheet_directory() . '/languages' );
+	// load_child_theme_textdomain( 'rubes-review', content_url() . '/languages/plugins' );
 }
 
 // Add the helper functions.
@@ -62,7 +63,6 @@ add_action( 'genesis_meta', 'cws_load_stylesheet' );
 function cws_load_stylesheet() {
 	wp_enqueue_style('rubes-review', get_bloginfo('stylesheet_url'), array(), filemtime( get_stylesheet_directory() . '/style.css'), 'screen' );
 }
-
 
 // Enqueue Scripts and Styles.
 add_action( 'wp_enqueue_scripts', 'rubes_review_enqueue_scripts_styles' );
