@@ -41,6 +41,9 @@ include_once( CORE_FUNCTION_DIR . '/lib/functions/update-shortcodes.php' );
 // Footer Setup.This should always be used.
 include_once( CORE_FUNCTION_DIR . '/lib/functions/core-footer.php' );
 
+// Customizer Config.
+include_once( CORE_FUNCTION_DIR . '/lib/functions/add-text-blocks.php' );
+
 // Gravity Forms tweaks. This should always be used if Gravity Forms active.
 if ( in_array( 'gravityforms/gravityforms.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	include_once( CORE_FUNCTION_DIR . '/lib/functions/gravitytweaks.php' );
