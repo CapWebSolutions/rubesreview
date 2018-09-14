@@ -26,7 +26,7 @@ rubesreview_init();
 add_action( 'after_setup_theme', 'rubes_review_localization_setup' );
 function rubes_review_localization_setup(){
 	load_child_theme_textdomain( 'rubes-review', get_stylesheet_directory() . '/languages' );
-	// load_child_theme_textdomain( 'rubes-review', content_url() . '/languages/plugins' );
+	load_child_theme_textdomain( 'rubes-review', content_url() . '/languages/plugins' );
 }
 
 // Add the helper functions.

@@ -63,7 +63,7 @@ function rubes_page_template_redirect() {
     if ( is_front_page() || is_user_logged_in() ) { return; }
     
     //Set list of okay pages for non-members to visit.
-    $ok_pages = array( 'about', 'careers', 'contact', 'sponsors', 'sponsors-2', 'login-to-rubes-review', 'spotlight-for-non-members' );
+    $ok_pages = array( 'about', 'careers', 'contact', 'join', 'sponsors', 'login-to-rubes-review', 'spotlight-for-non-members' );
 
     //If on one of the good pages, return.
     if ( is_page($ok_pages) ) { return; }
@@ -76,7 +76,7 @@ function rubes_page_template_redirect() {
     }
 
     //Oops. Not supposed to be on this page. Redirect to registration page.
-    wp_redirect(home_url( '/join/' ));
+    wp_redirect(home_url( '/register/' ));
     exit();
 }
 add_action( 'template_redirect', 'rubes_page_template_redirect' );

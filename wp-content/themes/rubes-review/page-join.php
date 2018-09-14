@@ -4,7 +4,7 @@
  *
  * This file adds the landing page template to the Genesis Sample Theme.
  *
- * Template Name: Landing
+ * Template Name: Landing Join
  *
  * @package Genesis Sample
  * @author  StudioPress
@@ -54,5 +54,26 @@ remove_action( 'genesis_footer', 'genesis_do_footer' );
 remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 remove_action( 'genesis_before_footer', 'dump_out_rubes_footer' );
 
-// Run the Genesis loop.
+add_action( 'genesis_after_entry_content', 'rubes_add_bp_registration' );
+/**
+ * Add Buddypress Registration Form
+ *
+ * Add Buddypress Registration Form to any page.
+ *
+ * @link https://buddydev.com/show-buddypress-user-registration-form-everywhere-buddypress-site/
+ *
+ * @package WordPress
+ * @since 1.0.0
+ * @license GNU General Public License 2.0+
+ */
+function rubes_add_bp_registration() {
+	$bp = buddypress();
+	
+	if( empty( $bp->signup->step ) )
+		$bp->signup->step='request-details';
+	
+	if( ! is_user_logged_in() )
+		get_template_part( 'register-form' );
+}
+	// Run the Genesis loop.
 genesis();
