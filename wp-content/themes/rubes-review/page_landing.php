@@ -1,15 +1,11 @@
 <?php
 /**
- * Genesis Sample.
+ * Rubes Review.
  *
- * This file adds the landing page template to the Genesis Sample Theme.
+ * This file adds the landing page template to the Rubes Review Theme.
  *
  * Template Name: Landing
  *
- * @package Genesis Sample
- * @author  StudioPress
- * @license GPL-2.0+
- * @link    http://www.studiopress.com/
  */
 
 // Add landing page body class to the head.
