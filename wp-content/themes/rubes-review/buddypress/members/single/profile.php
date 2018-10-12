@@ -10,7 +10,7 @@ add_action('genesis_after_header', 'rubes_add_beaver_header');
 function rubes_add_beaver_header(){
    FLBuilder::render_query( array(
 	   'post_type' => 'fl-builder-template',
-	   'p'         => 956 // Breaver Header Template ID
+	   'p'         => 956 // Beaver Header Template ID
    ) );
 }
 
