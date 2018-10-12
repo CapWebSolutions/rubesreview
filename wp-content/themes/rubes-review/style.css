@@ -64,7 +64,8 @@
 	- Comments
 	- Front Page
 	- Ratings Page	
-	- Resources Page	
+    - Resources Page
+    - Buddypress Registration Page	
 - Sidebars
 - Footer Widgets
 - Site Footer
@@ -2117,6 +2118,18 @@ body>div.site-container>header>div>div {
 }
 
 
+/* ## Buddypress Registration Page
+--------------------------------------------- */
+
+.registration.buddypress .buddypress-wrap input[type=submit] {
+    background: #CE2028;
+    border-color: #CE2028;
+    color: #fff;
+    font-weight: 700;
+    padding: 16px 24px;
+}
+
+
 /* # Sidebars
 ---------------------------------------------------------------------------------------------------- */
 
@@ -2939,6 +2952,13 @@ div.flexible-widgets.widget-area.spotlight-widget.widget-thirds>div {
     .footer-widgets-2 {
         margin: 0 auto 40px;
     }
+    #genesis-content>article>footer>div>div.footer-alignleft,
+    #genesis-content>article>footer>div>div.footer-alignright {
+        margin: 0;
+        padding: 0;
+        float: none;
+        text-align: center;
+    }
 }
 
 @media only screen and (max-width: 860px) {
@@ -3002,11 +3022,6 @@ div.flexible-widgets.widget-area.spotlight-widget.widget-thirds>div {
 }
 
 
-/* Rating Page */
-
-@media only screen and (max-width: 800px) {}
-
-
 /* Change background image on mobile view*/
 
 @media (max-width: 767px) {
@@ -3026,12 +3041,6 @@ div.flexible-widgets.widget-area.spotlight-widget.widget-thirds>div {
     .spotlight-cta-widget .right-cta {
         margin-top: 30px;
     }
-    body>div.site-container>footer>div>div.alignleft,
-    body>div.site-container>footer>div>div.alignright {
-        width: 100%;
-        float: none;
-        text-align: center;
-    }
     h1 {
         font-size: 5vw;
     }
@@ -3045,13 +3054,5 @@ div.flexible-widgets.widget-area.spotlight-widget.widget-thirds>div {
     }
     .home-page h4>span {
         font-size: 3.5vw;
-    }
-    .site-footer .footer-alignright,
-    .site-footer .footer-alignleft {
-        width: 100%;
-        margin: 0 auto;
-        float: none;
-        text-align: inherit;
-        padding: 0;
     }
 }

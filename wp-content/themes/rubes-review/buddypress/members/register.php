@@ -1,431 +1,305 @@
-<?php
-/**
- * BuddyPress - Members Register
- *
- * @package BuddyPress
- * @subpackage bp-legacy
- */
+<?php get_header( 'buddypress' ); ?>
 
-?>
+	<div id="content">
+		<div class="padder reg-reg">
 
-<div id="buddypress">
+		<?php do_action( 'bp_before_register_page' ); ?>
 
-	<?php
+		<div class="page" id="register-page">
 
-	/**
-	 * Fires at the top of the BuddyPress member registration page template.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_register_page' ); ?>
+			<form action="" name="signup_form" id="signup_form" class="standard-form" method="post" enctype="multipart/form-data">
 
-	<div class="page" id="register-page">
+			<?php if ( 'registration-disabled' == bp_get_current_signup_step() ) : ?>
+				<?php do_action( 'template_notices' ); ?>
+				<?php do_action( 'bp_before_registration_disabled' ); ?>
 
-		<form action="" name="signup_form" id="signup_form" class="standard-form" method="post" enctype="multipart/form-data">
+					<p><?php _e( 'User registration is currently not allowed.', 'buddypress' ); ?></p>
 
-		<?php if ( 'registration-disabled' == bp_get_current_signup_step() ) : ?>
+				<?php do_action( 'bp_after_registration_disabled' ); ?>
+			<?php endif; // registration-disabled signup setp ?>
 
-			<div id="template-notices" role="alert" aria-atomic="true">
-				<?php
+			<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
 
-				/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-				do_action( 'template_notices' ); ?>
+				<h2><?php _e( 'Create an Account', 'buddypress' ); ?></h2>
 
-			</div>
+				<?php do_action( 'template_notices' ); ?>
 
-			<?php
+				<p><?php _e( 'Registering for this site is easy, just fill in the fields below and we\'ll get a new account set up for you in no time.', 'buddypress' ); ?></p>
 
-			/**
-			 * Fires before the display of the registration disabled message.
-			 *
-			 * @since 1.5.0
-			 */
-			do_action( 'bp_before_registration_disabled' ); ?>
+				<?php do_action( 'bp_before_account_details_fields' ); ?>
 
-				<p><?php _e( 'User registration is currently not allowed.', 'buddypress' ); ?></p>
+				<div class="register-section" id="basic-details-section">
 
-			<?php
+					<?php /***** Basic Account Details ******/ ?>
 
-			/**
-			 * Fires after the display of the registration disabled message.
-			 *
-			 * @since 1.5.0
-			 */
-			do_action( 'bp_after_registration_disabled' ); ?>
-		<?php endif; // registration-disabled signup step ?>
+					<h4><?php _e( 'Account Details', 'buddypress' ); ?></h4>
 
-		<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
+					<label for="signup_username"><?php _e( 'Name', 'buddypress' ); ?></label>
+					<?php do_action( 'bp_signup_username_errors' ); ?>
+					<input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" />
 
-			<div id="template-notices" role="alert" aria-atomic="true">
-				<?php
+					<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?></label>
+					<?php do_action( 'bp_signup_email_errors' ); ?>
+					<input type="text" name="signup_email" id="signup_email" value="<?php bp_signup_email_value(); ?>" />
 
-				/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-				do_action( 'template_notices' ); ?>
+					<label for="signup_password"><?php _e( 'Choose a Password', 'buddypress' ); ?></label>
+					<?php do_action( 'bp_signup_password_errors' ); ?>
+					<input type="password" name="signup_password" id="signup_password" value="" />
 
-			</div>
+					<label for="signup_password_confirm"><?php _e( 'Confirm Password', 'buddypress' ); ?></label>
+					<?php do_action( 'bp_signup_password_confirm_errors' ); ?>
+					<input type="password" name="signup_password_confirm" id="signup_password_confirm" value="" />
 
-			<!-- <p><?php _e( 'Registering for this site is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'buddypress' ); ?></p> -->
+					<?php do_action( 'bp_account_details_fields' ); ?>
 
-			<?php
+				</div><!-- #basic-details-section -->
 
-			/**
-			 * Fires before the display of member registration account details fields.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_before_account_details_fields' ); ?>
+				<?php do_action( 'bp_after_account_details_fields' ); ?>
 
-			<div class="register-section" id="basic-details-section">
+				<?php /***** Extra Profile Details ******/ ?>
 
-				<?php /***** Basic Account Details ******/ ?>
+				<?php if ( bp_is_active( 'xprofile' ) ) : ?>
 
-				<h2><?php _e( 'Account Details', 'buddypress' ); ?></h2>
+					<?php do_action( 'bp_before_signup_profile_fields' ); ?>
 
-				<label for="signup_username"><?php _e( 'Username', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
-				<?php
+					<div class="register-section" id="profile-details-section">
 
-				/**
-				 * Fires and displays any member registration username errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_username_errors' ); ?>
-				<input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
+						<h4><?php _e( 'Profile Details', 'buddypress' ); ?></h4>
 
-				<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
-				<?php
+						<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
+						<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
 
-				/**
-				 * Fires and displays any member registration email errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_email_errors' ); ?>
-				<input type="email" name="signup_email" id="signup_email" value="<?php bp_signup_email_value(); ?>" <?php bp_form_field_attributes( 'email' ); ?>/>
+						<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
-				<label for="signup_password"><?php _e( 'Choose a Password', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
-				<?php
+							<div class="editfield">
 
-				/**
-				 * Fires and displays any member registration password errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_password_errors' ); ?>
-				<input type="password" name="signup_password" id="signup_password" value="" class="password-entry" <?php bp_form_field_attributes( 'password' ); ?>/>
-				<div id="pass-strength-result"></div>
+								<?php if ( 'textbox' == bp_get_the_profile_field_type() ) : ?>
 
-				<label for="signup_password_confirm"><?php _e( 'Confirm Password', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
-				<?php
+									<label for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php _e( '(required)', 'buddypress' ); ?><?php endif; ?></label>
+									<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+									<input type="text" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>" value="<?php bp_the_profile_field_edit_value(); ?>" />
 
-				/**
-				 * Fires and displays any member registration password confirmation errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_password_confirm_errors' ); ?>
-				<input type="password" name="signup_password_confirm" id="signup_password_confirm" value="" class="password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/>
+								<?php endif; ?>
 
-				<?php
+								<?php if ( 'textarea' == bp_get_the_profile_field_type() ) : ?>
 
-				/**
-				 * Fires and displays any extra member registration details fields.
-				 *
-				 * @since 1.9.0
-				 */
-				do_action( 'bp_account_details_fields' ); ?>
+									<label for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php _e( '(required)', 'buddypress' ); ?><?php endif; ?></label>
+									<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+									<textarea rows="5" cols="40" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_edit_value(); ?></textarea>
 
-			</div><!-- #basic-details-section -->
+								<?php endif; ?>
 
-			<?php
+								<?php if ( 'selectbox' == bp_get_the_profile_field_type() ) : ?>
 
-			/**
-			 * Fires after the display of member registration account details fields.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_after_account_details_fields' ); ?>
+									<label for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php _e( '(required)', 'buddypress' ); ?><?php endif; ?></label>
+									<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+									<select name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>">
+										<?php bp_the_profile_field_options(); ?>
+									</select>
 
-			<?php /***** Extra Profile Details ******/ ?>
+								<?php endif; ?>
 
-			<?php if ( bp_is_active( 'xprofile' ) ) : ?>
+								<?php if ( 'multiselectbox' == bp_get_the_profile_field_type() ) : ?>
 
-				<?php
+									<label for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php _e( '(required)', 'buddypress' ); ?><?php endif; ?></label>
+									<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+									<select name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>" multiple="multiple">
+										<?php bp_the_profile_field_options(); ?>
+									</select>
 
-				/**
-				 * Fires before the display of member registration xprofile fields.
-				 *
-				 * @since 1.2.4
-				 */
-				do_action( 'bp_before_signup_profile_fields' ); ?>
+								<?php endif; ?>
 
-				<div class="register-section" id="profile-details-section">
+								<?php if ( 'radio' == bp_get_the_profile_field_type() ) : ?>
 
-					<h2><?php _e( 'Profile Details', 'buddypress' ); ?></h2>
+									<div class="radio">
+										<span class="label"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php _e( '(required)', 'buddypress' ); ?><?php endif; ?></span>
 
-					<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
-					<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
+										<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+										<?php bp_the_profile_field_options(); ?>
 
-					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+										<?php if ( !bp_get_the_profile_field_is_required() ) : ?>
+											<a class="clear-value" href="javascript:clear( '<?php bp_the_profile_field_input_name(); ?>' );"><?php _e( 'Clear', 'buddypress' ); ?></a>
+										<?php endif; ?>
+									</div>
 
-						<div<?php bp_field_css_class( 'editfield' ); ?>>
-							<fieldset>
+								<?php endif; ?>
 
-							<?php
-							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
-							$field_type->edit_field_html();
+								<?php if ( 'checkbox' == bp_get_the_profile_field_type() ) : ?>
 
-							/**
-							 * Fires before the display of the visibility options for xprofile fields.
-							 *
-							 * @since 1.7.0
-							 */
-							do_action( 'bp_custom_profile_edit_fields_pre_visibility' );
+									<div class="checkbox">
+										<span class="label"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php _e( '(required)', 'buddypress' ); ?><?php endif; ?></span>
 
-							if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
-								<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>"><span id="<?php bp_the_profile_field_input_name(); ?>-2">
-									<?php
-									printf(
-										__( 'This field can be seen by: %s', 'buddypress' ),
-										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-									);
-									?>
-									</span>
-									<button type="button" class="visibility-toggle-link" aria-describedby="<?php bp_the_profile_field_input_name(); ?>-2" aria-expanded="false"><?php _ex( 'Change', 'Change profile field visibility level', 'buddypress' ); ?></button>
-								</p>
+										<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+										<?php bp_the_profile_field_options(); ?>
+									</div>
 
-								<div class="field-visibility-settings" id="field-visibility-settings-<?php bp_the_profile_field_id() ?>">
-									<fieldset>
-										<legend><?php _e( 'Who can see this field?', 'buddypress' ) ?></legend>
+								<?php endif; ?>
 
-										<?php bp_profile_visibility_radio_buttons() ?>
+								<?php if ( 'datebox' == bp_get_the_profile_field_type() ) : ?>
 
-									</fieldset>
-									<button type="button" class="field-visibility-settings-close"><?php _e( 'Close', 'buddypress' ) ?></button>
+									<div class="datebox">
+										<label for="<?php bp_the_profile_field_input_name(); ?>_day"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php _e( '(required)', 'buddypress' ); ?><?php endif; ?></label>
+										<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
 
-								</div>
+										<select name="<?php bp_the_profile_field_input_name(); ?>_day" id="<?php bp_the_profile_field_input_name(); ?>_day">
+											<?php bp_the_profile_field_options( 'type=day' ); ?>
+										</select>
+
+										<select name="<?php bp_the_profile_field_input_name(); ?>_month" id="<?php bp_the_profile_field_input_name(); ?>_month">
+											<?php bp_the_profile_field_options( 'type=month' ); ?>
+										</select>
+
+										<select name="<?php bp_the_profile_field_input_name(); ?>_year" id="<?php bp_the_profile_field_input_name(); ?>_year">
+											<?php bp_the_profile_field_options( 'type=year' ); ?>
+										</select>
+									</div>
+
+								<?php endif; ?>
+
+								<?php if ( 'url' == bp_get_the_profile_field_type() ) : ?>
+
+									<label for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php _e( '(required)', 'buddypress' ); ?><?php endif; ?></label>
+									<input type="text" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>" value="<?php bp_the_profile_field_edit_value(); ?>" <?php if ( bp_get_the_profile_field_is_required() ) : ?>aria-required="true"<?php endif; ?>/>
+
+								<?php endif; ?>
+
+								<?php do_action( 'bp_custom_profile_edit_fields_pre_visibility' ); ?>
+
+								<?php if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
+									<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
+										<?php printf( __( 'This field can be seen by: <span class="current-visibility-level">%s</span>', 'buddypress' ), bp_get_the_profile_field_visibility_level_label() ) ?> <a href="#" class="visibility-toggle-link"><?php _ex( 'Change', 'Change profile field visibility level', 'buddypress' ); ?></a>
+									</p>
+
+									<div class="field-visibility-settings" id="field-visibility-settings-<?php bp_the_profile_field_id() ?>">
+										<fieldset>
+											<legend><?php _e( 'Who can see this field?', 'buddypress' ) ?></legend>
+
+											<?php bp_profile_visibility_radio_buttons() ?>
+
+										</fieldset>
+										<a class="field-visibility-settings-close" href="#"><?php _e( 'Close', 'buddypress' ) ?></a>
+
+									</div>
+								<?php else : ?>
+									<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
+										<?php printf( __( 'This field can be seen by: <span class="current-visibility-level">%s</span>', 'buddypress' ), bp_get_the_profile_field_visibility_level_label() ) ?>
+									</p>
+								<?php endif ?>
+
+								<?php do_action( 'bp_custom_profile_edit_fields' ); ?>
+
+								<p class="description"><?php bp_the_profile_field_description(); ?></p>
+
+							</div>
+
+						<?php endwhile; ?>
+
+						<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_group_field_ids(); ?>" />
+
+						<?php endwhile; endif; endif; ?>
+
+						<?php do_action( 'bp_signup_profile_fields' ); ?>
+
+					</div><!-- #profile-details-section -->
+
+					<?php do_action( 'bp_after_signup_profile_fields' ); ?>
+
+				<?php endif; ?>
+
+				<?php if ( bp_get_blog_signup_allowed() ) : ?>
+
+					<?php do_action( 'bp_before_blog_details_fields' ); ?>
+
+					<?php /***** Blog Creation Details ******/ ?>
+
+					<div class="register-section" id="blog-details-section">
+
+						<h4><?php _e( 'Blog Details', 'buddypress' ); ?></h4>
+
+						<p><input type="checkbox" name="signup_with_blog" id="signup_with_blog" value="1"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes, I\'d like to create a new site', 'buddypress' ); ?></p>
+
+						<div id="blog-details"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?>class="show"<?php endif; ?>>
+
+							<label for="signup_blog_url"><?php _e( 'Blog URL', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+							<?php do_action( 'bp_signup_blog_url_errors' ); ?>
+
+							<?php if ( is_subdomain_install() ) : ?>
+								http:// <input type="text" name="signup_blog_url" id="signup_blog_url" value="<?php bp_signup_blog_url_value(); ?>" /> .<?php bp_blogs_subdomain_base(); ?>
 							<?php else : ?>
-								<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
-									<?php
-									printf(
-										__( 'This field can be seen by: %s', 'buddypress' ),
-										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-									);
-									?>
-								</p>
-							<?php endif ?>
+								<?php echo home_url( '/' ); ?> <input type="text" name="signup_blog_url" id="signup_blog_url" value="<?php bp_signup_blog_url_value(); ?>" />
+							<?php endif; ?>
 
-							<?php
+							<label for="signup_blog_title"><?php _e( 'Site Title', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+							<?php do_action( 'bp_signup_blog_title_errors' ); ?>
+							<input type="text" name="signup_blog_title" id="signup_blog_title" value="<?php bp_signup_blog_title_value(); ?>" />
 
-							/**
-							 * Fires after the display of the visibility options for xprofile fields.
-							 *
-							 * @since 1.1.0
-							 */
-							do_action( 'bp_custom_profile_edit_fields' ); ?>
+							<span class="label"><?php _e( 'I would like my site to appear in search engines, and in public listings around this network.', 'buddypress' ); ?>:</span>
+							<?php do_action( 'bp_signup_blog_privacy_errors' ); ?>
 
-							</fieldset>
+							<label><input type="radio" name="signup_blog_privacy" id="signup_blog_privacy_public" value="public"<?php if ( 'public' == bp_get_signup_blog_privacy_value() || !bp_get_signup_blog_privacy_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes', 'buddypress' ); ?></label>
+							<label><input type="radio" name="signup_blog_privacy" id="signup_blog_privacy_private" value="private"<?php if ( 'private' == bp_get_signup_blog_privacy_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'No', 'buddypress' ); ?></label>
+
+							<?php do_action( 'bp_blog_details_fields' ); ?>
+
 						</div>
 
-					<?php endwhile; ?>
+					</div><!-- #blog-details-section -->
 
-					<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+					<?php do_action( 'bp_after_blog_details_fields' ); ?>
 
-					<?php endwhile; endif; endif; ?>
+				<?php endif; ?>
 
-					<?php
+				<?php do_action( 'bp_before_registration_submit_buttons' ); ?>
 
-					/**
-					 * Fires and displays any extra member registration xprofile fields.
-					 *
-					 * @since 1.9.0
-					 */
-					do_action( 'bp_signup_profile_fields' ); ?>
+				<div class="submit">
+					<input type="submit" name="signup_submit" id="signup_submit" value="<?php esc_attr_e( 'Complete Sign Up', 'buddypress' ); ?>" />
+				</div>
 
-				</div><!-- #profile-details-section -->
+				<?php do_action( 'bp_after_registration_submit_buttons' ); ?>
 
-				<?php
+				<?php wp_nonce_field( 'bp_new_signup' ); ?>
 
-				/**
-				 * Fires after the display of member registration xprofile fields.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_after_signup_profile_fields' ); ?>
+			<?php endif; // request-details signup step ?>
 
-			<?php endif; ?>
+			<?php if ( 'completed-confirmation' == bp_get_current_signup_step() ) : ?>
 
-			<?php if ( bp_get_blog_signup_allowed() ) : ?>
+				<h2><?php _e( 'Check Your Email To Activate Your Account!', 'buddypress' ); ?></h2>
 
-				<?php
+				<?php do_action( 'template_notices' ); ?>
+				<?php do_action( 'bp_before_registration_confirmed' ); ?>
 
-				/**
-				 * Fires before the display of member registration blog details fields.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_before_blog_details_fields' ); ?>
-
-				<?php /***** Blog Creation Details ******/ ?>
-
-				<div class="register-section" id="blog-details-section">
-
-					<h2><?php _e( 'Blog Details', 'buddypress' ); ?></h2>
-
-					<p><label for="signup_with_blog"><input type="checkbox" name="signup_with_blog" id="signup_with_blog" value="1"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes, I\'d like to create a new site', 'buddypress' ); ?></label></p>
-
-					<div id="blog-details"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?>class="show"<?php endif; ?>>
-
-						<label for="signup_blog_url"><?php _e( 'Blog URL', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
-						<?php
-
-						/**
-						 * Fires and displays any member registration blog URL errors.
-						 *
-						 * @since 1.1.0
-						 */
-						do_action( 'bp_signup_blog_url_errors' ); ?>
-
-						<?php if ( is_subdomain_install() ) : ?>
-							http:// <input type="text" name="signup_blog_url" id="signup_blog_url" value="<?php bp_signup_blog_url_value(); ?>" /> .<?php bp_signup_subdomain_base(); ?>
-						<?php else : ?>
-							<?php echo home_url( '/' ); ?> <input type="text" name="signup_blog_url" id="signup_blog_url" value="<?php bp_signup_blog_url_value(); ?>" />
-						<?php endif; ?>
-
-						<label for="signup_blog_title"><?php _e( 'Site Title', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
-						<?php
-
-						/**
-						 * Fires and displays any member registration blog title errors.
-						 *
-						 * @since 1.1.0
-						 */
-						do_action( 'bp_signup_blog_title_errors' ); ?>
-						<input type="text" name="signup_blog_title" id="signup_blog_title" value="<?php bp_signup_blog_title_value(); ?>" />
-
-						<fieldset class="register-site">
-							<legend class="label"><?php _e( 'Privacy: I would like my site to appear in search engines, and in public listings around this network.', 'buddypress' ); ?></legend>
-							<?php
-
-							/**
-							 * Fires and displays any member registration blog privacy errors.
-							 *
-							 * @since 1.1.0
-							 */
-							do_action( 'bp_signup_blog_privacy_errors' ); ?>
-
-							<label for="signup_blog_privacy_public"><input type="radio" name="signup_blog_privacy" id="signup_blog_privacy_public" value="public"<?php if ( 'public' == bp_get_signup_blog_privacy_value() || !bp_get_signup_blog_privacy_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes', 'buddypress' ); ?></label>
-							<label for="signup_blog_privacy_private"><input type="radio" name="signup_blog_privacy" id="signup_blog_privacy_private" value="private"<?php if ( 'private' == bp_get_signup_blog_privacy_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'No', 'buddypress' ); ?></label>
-						</fieldset>
-
-						<?php
-
-						/**
-						 * Fires and displays any extra member registration blog details fields.
-						 *
-						 * @since 1.9.0
-						 */
-						do_action( 'bp_blog_details_fields' ); ?>
-
-					</div>
-
-				</div><!-- #blog-details-section -->
-
-				<?php
-
-				/**
-				 * Fires after the display of member registration blog details fields.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_after_blog_details_fields' ); ?>
-
-			<?php endif; ?>
-
-			<?php
-
-			/**
-			 * Fires before the display of the registration submit buttons.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_before_registration_submit_buttons' ); ?>
-
-			<div class="submit">
-				<input type="submit" name="signup_submit" id="signup_submit" value="<?php esc_attr_e( 'Complete Sign Up', 'buddypress' ); ?>" />
-			</div>
-
-			<?php
-
-			/**
-			 * Fires after the display of the registration submit buttons.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_after_registration_submit_buttons' ); ?>
-
-			<?php wp_nonce_field( 'bp_new_signup' ); ?>
-
-		<?php endif; // request-details signup step ?>
-
-		<?php if ( 'completed-confirmation' == bp_get_current_signup_step() ) : ?>
-
-			<div id="template-notices" role="alert" aria-atomic="true">
-				<?php
-
-				/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-				do_action( 'template_notices' ); ?>
-
-			</div>
-
-			<?php
-
-			/**
-			 * Fires before the display of the registration confirmed messages.
-			 *
-			 * @since 1.5.0
-			 */
-			do_action( 'bp_before_registration_confirmed' ); ?>
-
-			<div id="template-notices" role="alert" aria-atomic="true">
 				<?php if ( bp_registration_needs_activation() ) : ?>
 					<p><?php _e( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'buddypress' ); ?></p>
 				<?php else : ?>
 					<p><?php _e( 'You have successfully created your account! Please log in using the username and password you have just created.', 'buddypress' ); ?></p>
 				<?php endif; ?>
-			</div>
 
-			<?php
+				<?php do_action( 'bp_after_registration_confirmed' ); ?>
 
-			/**
-			 * Fires after the display of the registration confirmed messages.
-			 *
-			 * @since 1.5.0
-			 */
-			do_action( 'bp_after_registration_confirmed' ); ?>
+			<?php endif; // completed-confirmation signup step ?>
 
-		<?php endif; // completed-confirmation signup step ?>
+			<?php do_action( 'bp_custom_signup_steps' ); ?>
 
-		<?php
+			</form>
 
-		/**
-		 * Fires and displays any custom signup steps.
-		 *
-		 * @since 1.1.0
-		 */
-		do_action( 'bp_custom_signup_steps' ); ?>
+		</div>
 
-		</form>
+		<?php do_action( 'bp_after_register_page' ); ?>
 
-	</div>
+		</div><!-- .padder -->
+	</div><!-- #content -->
 
-	<?php
+	<?php get_sidebar( 'buddypress' ); ?>
 
-	/**
-	 * Fires at the bottom of the BuddyPress member registration page template.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_register_page' ); ?>
+	<script type="text/javascript">
+		jQuery(document).ready( function() {
+			if ( jQuery('div#blog-details').length && !jQuery('div#blog-details').hasClass('show') )
+				jQuery('div#blog-details').toggle();
 
-</div><!-- #buddypress -->
+			jQuery( 'input#signup_with_blog' ).click( function() {
+				jQuery('div#blog-details').fadeOut().toggle();
+			});
+		});
+	</script>
+
+<?php get_footer( 'buddypress' ); ?>
